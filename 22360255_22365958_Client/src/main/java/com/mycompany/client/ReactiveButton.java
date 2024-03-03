@@ -17,7 +17,7 @@ public class ReactiveButton extends AnchorPane{
     @FXML
     Rectangle background;
     @FXML
-    Rectangle shadow;
+    Rectangle slider;
     @FXML
     Label text;
     @FXML
@@ -62,6 +62,11 @@ public class ReactiveButton extends AnchorPane{
         this.background.setEffect(ds);
 
         this.setMaxHeight(this.background.getHeight());
+
+        this.slider.widthProperty().bind(this.background.widthProperty());
+        this.slider.heightProperty().bind(this.background.heightProperty());
+
+        this.slider.setX(100);
     }
 
     public void enterTransition(){
