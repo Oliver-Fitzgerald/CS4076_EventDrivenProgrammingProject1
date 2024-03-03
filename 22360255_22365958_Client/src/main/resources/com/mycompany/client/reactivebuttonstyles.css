@@ -17,3 +17,7 @@ AnchorPane {
     -fx-padding: 2 5 2 5;
     -fx-cursor: hand;
 }
+
+#slider {
+    -fx-fill: BLACK;
+}
