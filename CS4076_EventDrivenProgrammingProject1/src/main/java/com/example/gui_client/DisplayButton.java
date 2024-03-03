@@ -1,6 +1,5 @@
 package com.example.gui_client;
 
-import com.almasb.fxgl.localization.Language;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -30,7 +29,7 @@ public class DisplayButton extends Application {
         //Heading
         Label heading = new Label("Book class time") ;
         heading.setFont(new Font(heading.getFont().getName(),30));
-        parent.set
+        parent.setCenter(heading);
 
         //prompt Class details box
         VBox labels = new VBox() ;
