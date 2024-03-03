@@ -1,6 +1,6 @@
-#background {
-    -fx-fill: #ffffff;
-    -fx-stroke: #000000;
+#white {
+    -fx-fill: #eee;
+    -fx-stroke: #111827;
     -fx-stroke-width: 1px;
     -fx-arc-height: 5px;
     -fx-arc-width: 5px;
@@ -8,7 +8,15 @@
     -fx-cursor: hand;
 }
 
-AnchorPane {
+#black {
+    -fx-fill: #111827;
+    -fx-arc-height: 5px;
+    -fx-arc-width: 5px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+
+StackPane {
     -fx-cursor: hand;
 }
 
@@ -16,8 +24,7 @@ AnchorPane {
     -fx-alignment: center;
     -fx-padding: 2 5 2 5;
     -fx-cursor: hand;
-}
-
-#slider {
-    -fx-fill: BLACK;
+    -fx-font-family: Arial;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }

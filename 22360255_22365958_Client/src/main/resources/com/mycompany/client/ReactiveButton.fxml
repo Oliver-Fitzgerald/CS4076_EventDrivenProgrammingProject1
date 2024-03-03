@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.control.Label?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@reactivebuttonstyles.css">
-    <Rectangle fx:id="background" />
-    <Rectangle fx:id="slider" />
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@reactivebuttonstyles.css">
+    <Rectangle fx:id="black" />
+    <Rectangle fx:id="white" />
     <Label fx:id="text" />
 </fx:root>

@@ -1,11 +1,12 @@
 package com.mycompany.client;
 
-import javafx.animation.FillTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Label;
@@ -13,19 +14,16 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class ReactiveButton extends AnchorPane{
+public class ReactiveButton extends StackPane {
     @FXML
-    Rectangle background;
+    Rectangle white;
     @FXML
-    Rectangle slider;
+    Rectangle black;
+    Rectangle clip;
     @FXML
     Label text;
-    @FXML
-    AnchorPane pane;
-    FillTransition fillTransition;
-    FillTransition clearTransition;
-    boolean transitioning = false;
-    DropShadow ds = new DropShadow();
+    ScaleTransition slide;
+    Timeline textFill;
 
     public ReactiveButton(String text){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ReactiveButton.fxml"));
@@ -42,42 +40,56 @@ public class ReactiveButton extends AnchorPane{
     }
 
     public void initialize(String text){
-        fillTransition = new FillTransition(Duration.millis(300), background, Color.WHITE, Color.BLACK);
-        clearTransition = new FillTransition(Duration.millis(300), background, Color.BLACK, Color.WHITE);
-
         this.text.setText(text);
 
-        ds.setBlurType(BlurType.THREE_PASS_BOX);
-        ds.setColor(Color.BLACK);
-        ds.setRadius(1);
-        ds.setSpread(1);
-        ds.setOffsetX(2);
-        ds.setOffsetY(2);
+        this.black.widthProperty().bind(this.text.widthProperty());
+        this.black.heightProperty().bind(this.text.heightProperty());
 
-        this.setOnMouseEntered(event -> enterTransition());
-        this.setOnMouseExited(event -> exitTransition());
+        this.clip = new Rectangle(0, 0, this.black.getWidth(), this.black.getHeight());
+        this.clip.widthProperty().bind(this.black.widthProperty());
+        this.clip.heightProperty().bind(this.black.heightProperty());
+        this.clip.xProperty().bind(this.black.xProperty());
+        this.clip.yProperty().bind(this.black.yProperty());
 
-        this.background.widthProperty().bind(this.text.widthProperty());
-        this.background.heightProperty().bind(this.text.heightProperty());
-        this.background.setEffect(ds);
+        this.white.widthProperty().bind(this.black.widthProperty());
+        this.white.heightProperty().bind(this.black.heightProperty());
+        this.white.setClip(this.clip);
 
-        this.setMaxHeight(this.background.getHeight());
+        this.slide = new ScaleTransition(Duration.millis(300), white);
+        this.slide.setFromX(1);
+        this.slide.setToX(0);
+        this.slide.setFromY(1);
+        this.slide.setToY(0);
 
-        this.slider.widthProperty().bind(this.background.widthProperty());
-        this.slider.heightProperty().bind(this.background.heightProperty());
+        this.textFill = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(this.text.textFillProperty(), Color.BLACK)),
+                                     new KeyFrame(Duration.millis(300), new KeyValue(this.text.textFillProperty(), Color.WHITE)));
 
-        this.slider.setX(100);
+        this.maxHeightProperty().bind(this.black.heightProperty());
+
+        this.setOnMouseEntered(event -> enterEvent());
+        this.setOnMouseExited(event -> exitEvent());
     }
 
-    public void enterTransition(){
-        this.background.setEffect(null);
-        text.setTextFill(Color.WHITE);
-        fillTransition.play();
+    private void enterEvent(){
+        //Make fill transition for text
+        this.slide.stop();
+        this.textFill.stop();
+
+        this.slide.setRate(1);
+        this.textFill.setRate(1);
+
+        this.textFill.play();
+        this.slide.play();
     }
 
-    public void exitTransition(){
-        clearTransition.play();
-        text.setTextFill(Color.BLACK);
-        background.setEffect(ds);
+    private void exitEvent(){
+        this.slide.stop();
+        this.textFill.stop();
+
+        this.slide.setRate(-1);
+        this.textFill.setRate(-1);
+
+        this.textFill.play();
+        this.slide.play();
     }
 }
