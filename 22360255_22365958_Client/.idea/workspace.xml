@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38eb8cc6-aac6-4ea2-bbf7-705a7be46d77" name="Changes" comment="Initial Commit">
-      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/RemoveButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/resources/com/example/gui_client/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +48,9 @@
     "Application.Client.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client",
+    "last_opened_file_path": "C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/CS4076_EventDrivenProgrammingProject1",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
