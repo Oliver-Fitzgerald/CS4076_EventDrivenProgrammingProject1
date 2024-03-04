@@ -1,6 +1,8 @@
 package com.example.gui_client;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 public class MainMenu extends Application {
     public static void main(String args[]){
@@ -21,6 +24,10 @@ public class MainMenu extends Application {
 
         stage.setTitle("Class Scheduler");
 
+        //Creating parent Node
+        BorderPane parent = new BorderPane();
+        Scene scene = new Scene(parent,750,500) ;
+
         //Labels
         Label heading = new Label("Main Menu") ;
         heading.setFont(new Font(heading.getFont().getName(),30));
@@ -30,13 +37,24 @@ public class MainMenu extends Application {
         Button removeButton = new Button("Remove Class");
         Button displayButton = new Button("Display Class Schedule");
         Button terminateButton = new Button("Terminate");
+        DisplayButton displayObject = new DisplayButton() ;
+        displayButton.setOnAction(new EventHandler<ActionEvent>(){
+
+            public void handle(ActionEvent event){
+                BorderPane displayScreen = displayObject.start();
+                displayScreen.setMaxWidth(scene.getWidth() / 2);
+                displayScreen.setMaxHeight(scene.getHeight() / 2);
+                parent.setCenter(displayScreen) ;
+
+            }
+        });
+
         //Button box
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(addButton,displayButton,removeButton) ;
 
-        //Creating parent Node
-        BorderPane parent = new BorderPane();
+
 
         //setting position of heading
         BorderPane.setAlignment(heading, Pos.CENTER);
@@ -53,7 +71,6 @@ public class MainMenu extends Application {
         parent.setCenter(buttonBox);
 
         //adding Parent Node to scene and setting the scene
-        Scene scene = new Scene(parent,750,500) ;
         stage.setScene(scene);
         stage.show();
     }
