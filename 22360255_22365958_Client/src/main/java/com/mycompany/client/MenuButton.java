@@ -29,7 +29,7 @@ public class MenuButton extends ReactiveButton {
     }
 
     private void open(){
-        
+
     }
 
     private void close(){
