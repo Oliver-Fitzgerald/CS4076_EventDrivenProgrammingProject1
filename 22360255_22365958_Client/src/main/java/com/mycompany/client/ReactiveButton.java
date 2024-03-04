@@ -39,6 +39,10 @@ public class ReactiveButton extends StackPane {
         initialize(text);
     }
 
+    public ReactiveButton(){
+        this("");
+    }
+
     public void initialize(String text){
         this.text.setText(text);
 

@@ -14,7 +14,7 @@ import javafx.geometry.Rectangle2D;
 public class Client extends Application{
     private final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     private ReactiveButton addBtn = new ReactiveButton("Add Class");
-    private Button removeBtn = new Button("Remove Class");
+    private ReactiveButton removeBtn = new ReactiveButton("Remove Class");
     private Button displayBtn = new Button("Display Class Information");
     private Button terminateBtn = new Button("Terminate Connection");
     private Label serverResponseLbl = new Label("My Label");

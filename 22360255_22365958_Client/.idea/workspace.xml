@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38eb8cc6-aac6-4ea2-bbf7-705a7be46d77" name="Changes" comment="Initial Commit" />
+    <list default="true" id="38eb8cc6-aac6-4ea2-bbf7-705a7be46d77" name="Changes" comment="Initial Commit">
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +16,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -45,7 +48,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/CS4076_EventDrivenProgrammingProject1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -88,6 +91,10 @@
       <workItem from="1709468059150" duration="1898000" />
       <workItem from="1709479689173" duration="2529000" />
       <workItem from="1709482404731" duration="9655000" />
+      <workItem from="1709492228966" duration="136000" />
+      <workItem from="1709493770177" duration="49000" />
+      <workItem from="1709493845123" duration="1194000" />
+      <workItem from="1709569729971" duration="1486000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
