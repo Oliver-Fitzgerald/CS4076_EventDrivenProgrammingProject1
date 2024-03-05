@@ -32,6 +32,7 @@ public class MainMenu extends Application {
         Label heading = new Label("Main Menu") ;
         heading.setFont(new Font(heading.getFont().getName(),30));
 
+
         //Buttons
         Button addButton = new Button("Add Class");
         Button removeButton = new Button("Remove Class");
@@ -41,10 +42,10 @@ public class MainMenu extends Application {
         displayButton.setOnAction(new EventHandler<ActionEvent>(){
 
             public void handle(ActionEvent event){
-                BorderPane displayScreen = displayObject.start();
-                displayScreen.setMaxWidth(scene.getWidth() / 2);
-                displayScreen.setMaxHeight(scene.getHeight() / 2);
-                parent.setCenter(displayScreen) ;
+                displayObject.setMaxWidth(scene.getWidth() / 2);
+                displayObject.setMaxHeight(scene.getHeight() / 2);
+                parent.setCenter(displayObject) ;
+
 
             }
         });

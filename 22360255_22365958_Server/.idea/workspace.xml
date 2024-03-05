@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2208be00-281b-47c7-9993-a7e10a42463d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/RemoveButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/RemoveButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -37,9 +33,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/benja/Documents/22360255_22365958_Server",
+    "last_opened_file_path": "C:/Users/ofitz/Desktop/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
