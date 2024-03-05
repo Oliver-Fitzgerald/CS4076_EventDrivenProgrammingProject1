@@ -26,6 +26,18 @@ public class ReactiveButton extends StackPane {
     Timeline textFill;
 
     public ReactiveButton(String text){
+        //Here we load the button's fxml
+        this.loadButtonFXML();
+
+        //Here we initalize width, height, listeners, transitions, etc.
+        this.initialize(text);
+    }
+
+    public ReactiveButton(){
+        this("");
+    }
+
+    protected void loadButtonFXML() throws RuntimeException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ReactiveButton.fxml"));
         loader.setRoot(this);
         loader.setController(ReactiveButton.this);
@@ -35,12 +47,6 @@ public class ReactiveButton extends StackPane {
         }catch(IOException e){
             throw new RuntimeException(e);
         }
-
-        initialize(text);
-    }
-
-    public ReactiveButton(){
-        this("");
     }
 
     public void initialize(String text){
