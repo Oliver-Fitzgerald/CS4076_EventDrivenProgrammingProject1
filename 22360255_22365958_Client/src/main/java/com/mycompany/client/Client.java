@@ -11,13 +11,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.geometry.Rectangle2D;
 
+/**
+ * Our entry point to the client gui application.
+ * This creates the main scene and switches between the start screen and main screen.
+ */
 public class Client extends Application{
     private final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     private ReactiveButton addBtn = new ReactiveButton("Add Class");
     private ReactiveButton removeBtn = new ReactiveButton("Remove Class");
     private Button displayBtn = new Button("Display Class Information");
     private Button terminateBtn = new Button("Terminate Connection");
+    /**
+     * This label is included in order to give the user responsiveness.
+     * Things like "connection successful" and "added class succesfully"
+     */
     private Label serverResponseLbl = new Label("My Label");
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,6 +39,10 @@ public class Client extends Application{
         launch();
     }
 
+    /**
+     * Creates the main screen scene.
+     * @return Scene containing the children for the main menu. Those being HBox's and VBox's as well as the relevant buttons.
+     */
     public Scene createCommandScene(){
         //Here we create the basic layout structure of the scene.
         HBox btnBox = new HBox(addBtn, removeBtn, displayBtn);
