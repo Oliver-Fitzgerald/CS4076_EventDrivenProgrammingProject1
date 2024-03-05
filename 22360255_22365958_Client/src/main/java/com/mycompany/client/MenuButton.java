@@ -5,15 +5,29 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.animation.Animation.Status;
 
+/**
+ * The button used for add and remove class.
+ * It opens a menu for input when the user clicks it playing an animation when it does so.
+ */
 public class MenuButton extends ReactiveButton {
+    /**
+     * The scale transition of the black background.
+     */
     ScaleTransition openAnim;
 
+    /**
+     * Constructor for the menu button. It calls the initialization methods.
+     * @param text The text which the button should display.
+     */
     public MenuButton(String text) {
         super(text);
 
         initialize();
     }
 
+    /**
+     * Initializes the buttons components, specifically the transition and listeners.
+     */
     private void initialize(){
         //Set up the scaling transition on the black rectangle
         openAnim = new ScaleTransition(Duration.millis(500), black);
@@ -31,6 +45,9 @@ public class MenuButton extends ReactiveButton {
 
     }
 
+    /**
+     * Handles the opening of the menu when the button is clicked.
+     */
     private void open(){
         //Stop animation if the close animation is playing
         this.openAnim.stop();
@@ -46,6 +63,9 @@ public class MenuButton extends ReactiveButton {
         //Add load menu code here*****************************************************************
     }
 
+    /**
+     * Handles the closing of the menu when another button is focused on.
+     */
     private void close(){
         //Check if animation is playing. If it is stop it
         //If it isn't then its currently open so we need to unload the menu.

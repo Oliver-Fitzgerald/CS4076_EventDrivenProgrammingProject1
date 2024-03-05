@@ -40,7 +40,7 @@ public class Client extends Application{
     }
 
     /**
-     * Creates the main screen scene.
+     * Creates the main screen scene. It initializes components and sets width and height.
      * @return Scene containing the children for the main menu. Those being HBox's and VBox's as well as the relevant buttons.
      */
     public Scene createCommandScene(){
