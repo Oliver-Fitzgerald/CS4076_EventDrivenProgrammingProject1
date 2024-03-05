@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2208be00-281b-47c7-9993-a7e10a42463d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/MenuButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/MenuButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
