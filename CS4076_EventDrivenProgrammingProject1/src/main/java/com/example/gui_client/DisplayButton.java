@@ -1,5 +1,7 @@
 package com.example.gui_client;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -9,15 +11,18 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import org.controlsfx.control.spreadsheet.Grid;
 
+import java.io.LineNumberInputStream;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DisplayButton extends GridPane {
-    private String[] suggestions = new String[24 * 60];
-    private ArrayList<String> classList = new ArrayList<>() ;
-    private String[] rooms =  {"KBG1","KBG2","CSG001","CSG002","FB042",} ;
-
+    private String[] suggestions = new String[24 * 4];
+    private String[] classList = {"Computer Systems(lm051)","Philosophy (mf041)","Mechanical Engineering (lm060)","Arts (mf042)"};
+    private String[] rooms =  {"Kemmy Business School G01","Kemmy Business School G02","Computer Science G001","Computer Science G002","Foundation Building 042",} ;
+    private String userInput ;
     @FXML
     private Label heading = new Label("Book class time") ;
     @FXML
@@ -33,9 +38,9 @@ public class DisplayButton extends GridPane {
     @FXML
     private DatePicker datePicker = new DatePicker() ;
     @FXML
-    private ComboBox<String> getClass = new ComboBox<String>() ;
+    private TextField getClass = new TextField() ;
     @FXML
-    private ComboBox<String> getRoom = new ComboBox<String>() ;
+    private TextField getRoom = new TextField() ;
     @FXML
     private ComboBox<String> getToTime = new ComboBox<String>() ;
     @FXML
@@ -79,28 +84,18 @@ public class DisplayButton extends GridPane {
 
 
         //time autofill
+        suggestions = fillTimeArray(suggestions) ;
         getToTime.setPromptText("13:00");
         getToTime.setEditable(true);
         getToTime.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
             autoFillBox(getToTime ,newValue,suggestions);
         });
         getFromTime.setPromptText("13:00");
-        getToTime.setEditable(true);
-        getToTime.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
+        getFromTime.setEditable(true);
+        getFromTime.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
             autoFillBox(getFromTime ,newValue,suggestions);
         });
 
-        //class and room code autofill
-        getRoom.setPromptText("KGB10");
-        getRoom.setEditable(true);
-        getRoom.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
-            autoFillBox(getRoom ,newValue,suggestions);
-        });
-        getClass.setPromptText("lm051");
-        getClass.setEditable(true);
-        getClass.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
-            autoFillBox(getClass ,newValue,suggestions);
-        });
 
         //DATE
         date.setPadding(new Insets(10));
@@ -134,29 +129,48 @@ public class DisplayButton extends GridPane {
         border.setFill(null);
         border.setStrokeWidth(5);
 
+        //Book button
+        userInput = "" ;
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                userInput += "Date:" + datePicker.getValue().toString() ;
+                userInput += ",ClassCode:" + getClass.getText();
+                userInput += ",RoomCode:" + getRoom.getText();
+                userInput += ",From:" + getFromTime.getValue();
+                userInput += ",To:" + getToTime.getValue() ;
+
+                //
+                System.out.println("user input = " + userInput);
+                //
+            }
+        });
+
+
    }
 
     private static void autoFillBox(ComboBox box,String newValue ,String[] suggestions){
-
-        if (suggestions[0] == null){
-            for (int hour = 0; hour < 24; hour++) {
-                for (int minute = 0; minute < 60; minute++) {
-                    String time = String.format("%02d:%02d", hour, minute);
-                    suggestions[hour * 60 + minute] = time;
-                }
-            }
-        }
         box.getItems().clear();
         String input = newValue ;
 
         for (String suggestion:suggestions ){
-            if (suggestion.length() < 6){
              if (suggestion.substring(0, input.length()).equals(input))
                 box.getItems().add(suggestion);
-            }
-            else if (suggestion.substring(input.indexOf("("),input.indexOf(")")).equals(input.substring(0,input.substring(input.indexOf("("),input.indexOf(")")).length())))
-                box.getItems().add(suggestion);
-
         }
+    }
+    /**
+     *Fills the suggestions array with times incrementing by 15mins
+     * @Param suggestions String[]
+    */
+    private static String[] fillTimeArray(String[] suggestions){
+        int number = 0;
+
+        for (int hour = 0; hour < 24; hour++) {
+            for (int minute = 0; minute < 4; minute++) {
+                String time = String.format("%02d:%02d", hour, minute * 15);
+                suggestions[minute + (hour * 4)] = time;
+            }
+        }
+        return suggestions ;
     }
 }

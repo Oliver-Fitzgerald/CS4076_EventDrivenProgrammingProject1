@@ -42,8 +42,7 @@ public class MainMenu extends Application {
         displayButton.setOnAction(new EventHandler<ActionEvent>(){
 
             public void handle(ActionEvent event){
-                displayObject.setMaxWidth(scene.getWidth() / 2);
-                displayObject.setMaxHeight(scene.getHeight() / 2);
+                BorderPane.setAlignment(displayObject,Pos.CENTER);
                 parent.setCenter(displayObject) ;
 
 
