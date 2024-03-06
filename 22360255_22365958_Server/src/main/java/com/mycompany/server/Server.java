@@ -21,9 +21,10 @@ public class Server {
             System.out.println("Can't connect to port.");
             System.exit(1);
         }
+        finally {
 
-        startServerLoadPrint.interrupt();
-
+            startServerLoadPrint.interrupt();
+        }
         run();
     }
 
