@@ -43,9 +43,7 @@ public class MainMenu extends Application {
 
             public void handle(ActionEvent event){
                 BorderPane.setAlignment(displayObject,Pos.CENTER);
-                parent.setCenter(displayObject) ;
-
-
+                parent.setCenter(displayObject);
             }
         });
 

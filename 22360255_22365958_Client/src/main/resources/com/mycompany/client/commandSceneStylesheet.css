@@ -1,9 +1,6 @@
 VBox {
     -fx-background-color: #848A98;
     -fx-alignment: center;
-    -fx-border-color: #4B4A50;
-    -fx-border-width: 0 5 5 0;
-    -fx-border-radius: 0 0 7.5 0;
 }
 
 HBox {

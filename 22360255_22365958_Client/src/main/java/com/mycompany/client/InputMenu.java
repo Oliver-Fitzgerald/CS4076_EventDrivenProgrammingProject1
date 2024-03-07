@@ -1,65 +1,46 @@
-package com.example.gui_client;
+package com.mycompany.client;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-public class DisplayButton extends GridPane {
+public class InputMenu extends GridPane {
     private String[] suggestions = new String[24 * 4];
     private String[] classList = {"Computer Systems(lm051)","Philosophy (mf041)","Mechanical Engineering (lm060)","Arts (mf042)"};
     private String[] rooms =  {"Kemmy Business School G01","Kemmy Business School G02","Computer Science G001","Computer Science G002","Foundation Building 042",} ;
     private String userInput ;
-    @FXML
     private Label heading = new Label("Book class time") ;
-    @FXML
     private Label enterClass = new Label("Class:") ;
-    @FXML
     private Label enterRoom = new Label("Room:") ;
-    @FXML
     private Label enterFrom = new Label("From:") ;
-    @FXML
     private Label enterTo = new Label("To:") ;
-    @FXML
     private Label enterDate = new Label("Date:") ;
-    @FXML
     private DatePicker datePicker = new DatePicker() ;
-    @FXML
     private TextField getClass = new TextField() ;
-    @FXML
     private TextField getRoom = new TextField() ;
-    @FXML
     private ComboBox<String> getToTime = new ComboBox<String>() ;
-    @FXML
     private ComboBox<String> getFromTime = new ComboBox<String>() ;
-    @FXML
     private Button submitButton = new Button("Book") ;
-    @FXML
     private HBox date = new HBox(enterDate,datePicker) ;
-    @FXML
     private HBox classCode = new HBox(enterClass,getClass) ;
-    @FXML
     private HBox roomCode = new HBox(enterRoom,getRoom) ;
-    @FXML
     private HBox codes = new HBox(classCode,roomCode) ;
-    @FXML
     private HBox startTime = new HBox(enterFrom,getToTime) ;
-    @FXML
     private HBox endTime = new HBox(enterTo,getFromTime) ;
-    @FXML
     private HBox time = new HBox(startTime,endTime) ;
-    @FXML
     private VBox details = new VBox(date,codes,time,submitButton) ;
-    @FXML
     private Rectangle border = new Rectangle();
-    public DisplayButton(){
+
+    public InputMenu(){
 
         //Heading
         heading.setFont(new Font(heading.getFont().getName(),20));

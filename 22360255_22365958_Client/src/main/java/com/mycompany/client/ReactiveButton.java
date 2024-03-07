@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
@@ -127,6 +128,7 @@ public class ReactiveButton extends StackPane {
 
         //Binds the stackpane's height to the black background's height.
         this.maxHeightProperty().bind(this.black.heightProperty());
+        this.maxWidthProperty().bind(Bindings.multiply(this.black.widthProperty(), 1.01));
 
         //Sets onMouseEntered and onMouseExited listeners to the event handlers.
         this.setOnMouseEntered(event -> enterEvent());

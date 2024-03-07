@@ -7,6 +7,8 @@
     <list default="true" id="38eb8cc6-aac6-4ea2-bbf7-705a7be46d77" name="Changes" comment="Initial Commit">
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/src/main/java/com/mycompany/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/src/main/java/com/mycompany/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ofitz/Desktop/CS4076_EventDrivenProgrammingProject1/CS4076_EventDrivenProgrammingProject1",
+    "last_opened_file_path": "C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -59,6 +61,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mycompany.client" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.mycompany.client.Client" />
@@ -97,6 +104,8 @@
       <workItem from="1709493845123" duration="1194000" />
       <workItem from="1709569729971" duration="1486000" />
       <workItem from="1709645751374" duration="6464000" />
+      <workItem from="1709823759655" duration="85000" />
+      <workItem from="1709824393899" duration="1357000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />

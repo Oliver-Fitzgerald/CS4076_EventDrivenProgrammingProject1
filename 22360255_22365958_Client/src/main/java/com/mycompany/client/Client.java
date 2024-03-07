@@ -3,6 +3,7 @@ package com.mycompany.client;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
@@ -17,10 +18,10 @@ import javafx.geometry.Rectangle2D;
  */
 public class Client extends Application{
     private final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-    private ReactiveButton addBtn = new ReactiveButton("Add Class");
-    private ReactiveButton removeBtn = new ReactiveButton("Remove Class");
-    private Button displayBtn = new Button("Display Class Information");
-    private Button terminateBtn = new Button("Terminate Connection");
+    private MenuButton addBtn = new MenuButton("Add Class");
+    private MenuButton removeBtn = new MenuButton("Remove Class");
+    private ReactiveButton displayBtn = new ReactiveButton("Display Class Information");
+    private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection");
     /**
      * This label is included in order to give the user responsiveness.
      * Things like "connection successful" and "added class succesfully"

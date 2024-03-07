@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2208be00-281b-47c7-9993-a7e10a42463d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/ClientToServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/MenuButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/MenuButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/resources/com/mycompany/client/commandSceneStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/resources/com/mycompany/client/commandSceneStylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/DisplayButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CS4076_EventDrivenProgrammingProject1/src/main/java/com/example/gui_client/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +38,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ofitz/Desktop/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Server",
+    "last_opened_file_path": "C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,6 +83,7 @@
       <workItem from="1709493812408" duration="628000" />
       <workItem from="1709569700749" duration="2429000" />
       <workItem from="1709645603400" duration="744000" />
+      <workItem from="1709823438133" duration="918000" />
     </task>
     <servers />
   </component>

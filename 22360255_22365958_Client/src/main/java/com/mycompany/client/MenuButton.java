@@ -61,6 +61,9 @@ public class MenuButton extends ReactiveButton {
         this.openAnim.play();
 
         //Add load menu code here*****************************************************************
+        InputMenu menu = new InputMenu();
+        this.getChildren().clear();
+        this.getChildren().add(menu);
     }
 
     /**
@@ -73,6 +76,7 @@ public class MenuButton extends ReactiveButton {
             this.openAnim.stop();
         else{
             //Add unload menu code here**********************************************************
+            this.getChildren().clear();
         }
 
         this.openAnim.setRate(-1);

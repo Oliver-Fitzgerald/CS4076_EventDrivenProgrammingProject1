@@ -11,7 +11,11 @@ public class Server {
     private static ServerSocket servSock;
     private static final int PORT = 30572;
     private static int numConnections = 0;
+    private static boolean loading;
+
     public static void main(String[] args) {
+        loading = true;
+
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Connected Successfully"));
         startServerLoadPrint.start();
 
@@ -23,7 +27,7 @@ public class Server {
         }
         finally {
 
-            startServerLoadPrint.interrupt();
+            loading = false;
         }
         run();
     }
@@ -63,7 +67,7 @@ public class Server {
             try{
                 int i = 1;
                 System.out.print(this.startMessage);
-                while(true) {
+                while(loading) {
                     System.out.print(".".repeat(i));
                     System.out.flush();
                     Thread.sleep(500);
