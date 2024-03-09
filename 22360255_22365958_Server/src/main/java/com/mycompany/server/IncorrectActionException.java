@@ -1,6 +1,4 @@
-package com.mycompany.client;
-
-import javafx.application.Application;
+package com.mycompany.server;
 
 public class IncorrectActionException extends Exception {
     private String errorMessage ;

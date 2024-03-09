@@ -22,6 +22,8 @@ public class Client extends Application{
     private MenuButton removeBtn = new MenuButton("Remove Class");
     private ReactiveButton displayBtn = new ReactiveButton("Display Class Information");
     private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection");
+
+
     /**
      * This label is included in order to give the user responsiveness.
      * Things like "connection successful" and "added class succesfully"
@@ -68,4 +70,13 @@ public class Client extends Application{
 
         return commandScene;
     }
+
+    public String getAddMessage(){return addBtn.getMessage() ;}
+    public String getRemMessage(){return removeBtn.getMessage() ;}
+    public boolean getAddSend(){return addBtn.getSend() ;}
+    public boolean getRemSend(){return removeBtn.getSend()  ;}
+    public void reSetSend() {
+        addBtn.reSetSend();
+        removeBtn.reSetSend();
+    ;}
 }

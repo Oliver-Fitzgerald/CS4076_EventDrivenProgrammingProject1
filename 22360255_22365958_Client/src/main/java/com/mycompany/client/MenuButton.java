@@ -14,6 +14,14 @@ import javafx.animation.Animation.Status;
  * It opens a menu for input when the user clicks it playing an animation when it does so.
  */
 public class MenuButton extends ReactiveButton {
+
+    //message to be sent to the server
+
+    private InputMenu menu;
+    private boolean send = menu.getSend() ;
+    private String message = menu.getMessage() ;
+
+
     /**
      * The scale transition of the black background.
      */
@@ -29,7 +37,6 @@ public class MenuButton extends ReactiveButton {
      * This tracks if this button is focused or not.
      */
     private BooleanProperty isOpen = new SimpleBooleanProperty(false);
-    private InputMenu menu;
 
     /**
      * Constructor for the menu button. It calls the initialization methods.
@@ -126,4 +133,7 @@ public class MenuButton extends ReactiveButton {
     public BooleanProperty openProperty(){
         return this.isOpen;
     }
+    public String getMessage(){return this.message ;}
+    public Boolean getSend(){return this.send ;}
+    public void reSetSend(){menu.reSetSend() ;}
 }
