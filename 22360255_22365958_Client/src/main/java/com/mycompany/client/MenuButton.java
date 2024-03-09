@@ -18,9 +18,6 @@ public class MenuButton extends ReactiveButton {
     //message to be sent to the server
 
     private InputMenu menu;
-    private boolean send = menu.getSend() ;
-    private String message = menu.getMessage() ;
-
 
     /**
      * The scale transition of the black background.
@@ -133,7 +130,4 @@ public class MenuButton extends ReactiveButton {
     public BooleanProperty openProperty(){
         return this.isOpen;
     }
-    public String getMessage(){return this.message ;}
-    public Boolean getSend(){return this.send ;}
-    public void reSetSend(){menu.reSetSend() ;}
 }

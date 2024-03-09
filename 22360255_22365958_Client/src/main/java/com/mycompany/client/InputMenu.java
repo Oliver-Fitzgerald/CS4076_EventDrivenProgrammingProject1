@@ -19,7 +19,6 @@ public class InputMenu extends GridPane {
     private String[] rooms =  {"Kemmy Business School G01","Kemmy Business School G02","Computer Science G001","Computer Science G002","Foundation Building 042",} ;
     private Label heading = new Label("Module Data");
     private String userInput = "";
-    private boolean send = false ;
     private DatePicker datePicker = new DatePicker() ;
     private TextField getClass = new TextField() ;
     private TextField getRoom = new TextField() ;
@@ -69,7 +68,7 @@ public class InputMenu extends GridPane {
             userInput += ",RoomCode:" + getRoom.getText();
             userInput += ",From:" + getTime.getValue();
 
-            send = true ;
+
         });
 
 
@@ -106,6 +105,4 @@ public class InputMenu extends GridPane {
     public String getMessage(){
         return userInput ;
     }
-    public Boolean getSend(){return send ;}
-    public void reSetSend(){send = false ;}
 }

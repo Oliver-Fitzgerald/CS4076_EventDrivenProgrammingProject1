@@ -42,20 +42,6 @@ public class ClientServerConnection {
         try
         {
             link = new Socket(host,PORT); //Opens socket and connects with server
-
-            while (terminate == false) {
-
-
-                //Send Message
-                if (client.getAddSend() == true)
-                    handle(client.getAddMessage(),link);
-                if (client.getRemSend() == true)
-                    handle(client.getRemMessage(),link);
-
-
-
-            }
-
         }
         catch(IOException e)
         {
@@ -74,36 +60,22 @@ public class ClientServerConnection {
             }
 
         }
-
-
-
     }
 
 
-    public static void handle(String sendMessage,Socket link){
+    public static String handle(String sendMessage,Socket link){
+        String response = "";
         try {
             PrintWriter out = new PrintWriter(link.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-            String response;
             String code = sendMessage.substring(0, 3);;
-
-            //send message
-            out.println(sendMessage);
-            client.reSetSend();
 
             //receive message
             response = in.readLine(); //response == 1 success;else exception message
-            //ter
-            if (code.equals("ter") && response.equals("1"))
-                terminate = true;
-            //add
-            //rem
-            //dis
-            
         }
         catch (IOException e){
             System.out.println("Whoopsy in handle");
         }
+        return response;
     }
-
 }

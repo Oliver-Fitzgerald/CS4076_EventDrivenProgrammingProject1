@@ -70,13 +70,4 @@ public class Client extends Application{
 
         return commandScene;
     }
-
-    public String getAddMessage(){return addBtn.getMessage() ;}
-    public String getRemMessage(){return removeBtn.getMessage() ;}
-    public boolean getAddSend(){return addBtn.getSend() ;}
-    public boolean getRemSend(){return removeBtn.getSend()  ;}
-    public void reSetSend() {
-        addBtn.reSetSend();
-        removeBtn.reSetSend();
-    ;}
 }

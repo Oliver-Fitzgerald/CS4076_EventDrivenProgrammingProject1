@@ -14,8 +14,6 @@ public class Server {
     private static boolean loading;
 
     public static void main(String[] args) {
-        loading = true;
-
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Connected Successfully"));
         startServerLoadPrint.start();
 
@@ -33,7 +31,8 @@ public class Server {
     }
 
     private static void run(){
-        while(true){
+        loading = true;
+        while(loading){
             try{
                 Socket link = servSock.accept();
                 numConnections++;
@@ -111,12 +110,8 @@ public class Server {
                             break;
                         case "ter": //terminate connection
                             try {
-                                Thread closeCon = new Thread(new loadingText("Closing connection"));
-                                closeCon.start();
-
+                                System.out.println("Closing connection");
                                 sock.close();
-
-                                closeCon.interrupt();
                             }catch(IOException e){
                                 System.out.println("Unable to close connection.");
                                 System.exit(1);
