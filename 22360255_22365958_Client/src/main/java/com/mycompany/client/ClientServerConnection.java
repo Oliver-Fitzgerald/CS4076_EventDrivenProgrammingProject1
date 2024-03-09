@@ -20,79 +20,71 @@ import java.net.UnknownHostException;
 
 import static javafx.application.Application.launch;
 
-public class ClientServerConnection extends Application {
+public class ClientServerConnection {
     static InetAddress host;
-    static final int PORT = 1234;
-    Label label = new Label("Response From Server Will Display Here");
-    TextField textField = new TextField("");
-    Button button = new Button("Send");
+    static final int PORT = 1024; //0 -> 1023 are reserved
 
-    @Override
-    public void start(Stage stage) {
+    /**
+     * Opens connection with server
+     **/
+    public void connect(){
+        try
+        {
+            host = InetAddress.getLocalHost(); //gets the local address of the device
+        }
+        catch(UnknownHostException e)
+        {
+            System.out.println("Host ID not found!");
+            System.exit(-1);
+        }
 
-
-
-
-
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                try
-                {
-                    host = InetAddress.getLocalHost();
-                }
-                catch(UnknownHostException e)
-                {
-                    System.out.println("Host ID not found!");
-                    System.exit(1);
-                }
-                Socket link = null;
-                try
-                {
-                    link = new Socket(host,PORT);
-                    //link = new Socket( "192.168.0.59", PORT);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-                    PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-
-                    String message = null;
-                    String response= null;
-
-                    System.out.println("Enter message to be sent to server: ");
-                    message =  textField.getText().toString();
-                    out.println(message);
-                    response = in.readLine();
-                    label.setText(response);
-                }
-                catch(IOException e)
-                {
-                    e.printStackTrace();
-                }
-                finally
-                {
-                    try
-                    {
-                        System.out.println("\n* Closing connection... *");
-                        link.close();				//Step 4.
-                    }catch(IOException e)
-                    {
-                        System.out.println("Unable to disconnect/close!");
-                        System.exit(1);
-                    }
-                }
-            }});
-
-
-
-
-
-        VBox box= new VBox( textField, button, label);
-        var scene = new Scene(box, 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        run();
     }
 
-    public static void main(String[] args) {
-        launch() ;
+    public static void run(){
+        Socket link = null;
+        boolean terminate = false ;
+
+        try
+        {
+            link = new Socket(host,PORT); //Opens socket and connects with server
+
+            while (terminate == false) {
+
+                //Send Message
+
+                //Receive Response
+                //if (response == ter)
+                //  closeConnection;
+            }
+
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
     }
+
+    public static void closeConnection(){
+       /*
+
+        try
+        {
+            System.out.println("\n* Closing connection... *");
+            link.close(); //Closes connection with server
+
+        }catch(IOException e)
+        {
+            System.out.println("Unable to disconnect/close!");
+            System.exit(-1);
+        }
+
+        */
+    }
+
+
 
 }

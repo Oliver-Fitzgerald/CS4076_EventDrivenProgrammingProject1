@@ -115,9 +115,7 @@ public class InputMenu extends GridPane {
                 userInput += ",From:" + getFromTime.getValue();
                 userInput += ",To:" + getToTime.getValue() ;
 
-                //
-                System.out.println("user input = " + userInput);
-                //
+               //client.send("add" + userInput) ;
             }
         });
 
