@@ -25,7 +25,7 @@ public class InputMenu extends GridPane {
     private TextField getClass = new TextField() ;
     private TextField getRoom = new TextField() ;
     private ComboBox<String> getTime = new ComboBox<String>() ;
-    private ReactiveButton submitButton = new ReactiveButton("Book") ;
+    public ReactiveButton submitButton = new ReactiveButton("Book") ;
     private HBox codes = new HBox(getClass, getRoom) ;
     private VBox details = new VBox(datePicker, codes, getTime, submitButton) ;
 

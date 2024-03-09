@@ -74,7 +74,6 @@ public class MenuButton extends ReactiveButton {
         if(!this.isOpen.get()){
             if(currentButton != null){
                 currentButton.close();
-                currentButton.isOpen.set(false);
             }
             this.open();
             this.isOpen.set(true);
@@ -89,6 +88,7 @@ public class MenuButton extends ReactiveButton {
         this.menu = new InputMenu();
         this.menu.setMinWidth(175);
         this.menu.setMinHeight(215);
+        this.menu.submitButton.setOnMouseReleased(event -> close());
         //Stop animation if the close animation is playing
         this.closeAnim.stop();
 
@@ -112,6 +112,9 @@ public class MenuButton extends ReactiveButton {
             this.getChildren().remove(menu);
             this.menu = null;
         }
+
+        this.isOpen.set(false);
+        currentButton = null;
 
         this.closeAnim.play();
     }
