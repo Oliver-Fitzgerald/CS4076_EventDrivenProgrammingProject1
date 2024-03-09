@@ -1,0 +1,13 @@
+#heading{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+}
+
+VBox {
+    -fx-background-color: #111827;
+}
+
+HBox {
+    -fx-background-color: #111827;
+}

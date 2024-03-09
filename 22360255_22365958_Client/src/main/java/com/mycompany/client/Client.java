@@ -48,7 +48,7 @@ public class Client extends Application{
         //Here we create the basic layout structure of the scene.
         HBox btnBox = new HBox(addBtn, removeBtn, displayBtn);
         VBox menuBox = new VBox(btnBox, terminateBtn, serverResponseLbl);
-        Scene commandScene = new Scene(menuBox, screenBounds.getWidth()/3, screenBounds.getHeight()/3);
+        Scene commandScene = new Scene(menuBox, screenBounds.getWidth()/2, screenBounds.getHeight()/2);
 
         //As I've learned spacing should be done in the java not the css
         //due to bindings(can't have percentages in javafx css, as opposed to normal)
@@ -56,12 +56,12 @@ public class Client extends Application{
         //Very precise and arduous research
         menuBox.prefWidthProperty().bind(commandScene.widthProperty());
         menuBox.prefHeightProperty().bind(commandScene.heightProperty());
-        menuBox.spacingProperty().bind(Bindings.divide(menuBox.prefHeightProperty(), 8));
+        menuBox.spacingProperty().bind(Bindings.divide(menuBox.prefHeightProperty(), 6));
 
         btnBox.prefWidthProperty().bind(Bindings.divide(menuBox.prefWidthProperty(), 1.5));
         btnBox.prefHeightProperty().bind(Bindings.divide(menuBox.prefHeightProperty(), 3));
 
-        btnBox.spacingProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 8));
+        btnBox.spacingProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 5));
 
         //Adding a stylesheet to the scene
         commandScene.getStylesheets().add(String.valueOf(Client.class.getResource("commandSceneStyleSheet.css")));

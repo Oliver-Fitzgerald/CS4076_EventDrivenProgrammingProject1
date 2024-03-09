@@ -1,6 +1,10 @@
 package com.mycompany.client;
 
 import javafx.animation.ScaleTransition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.Menu;
+import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.animation.Animation.Status;
@@ -13,7 +17,19 @@ public class MenuButton extends ReactiveButton {
     /**
      * The scale transition of the black background.
      */
-    ScaleTransition openAnim;
+    private ScaleTransition openAnim;
+    private ScaleTransition closeAnim;
+
+    /**
+     * This tracks which of the buttons is currently open.
+     */
+    private static MenuButton currentButton = null;
+
+    /**
+     * This tracks if this button is focused or not.
+     */
+    private BooleanProperty isOpen = new SimpleBooleanProperty(false);
+    private InputMenu menu;
 
     /**
      * Constructor for the menu button. It calls the initialization methods.
@@ -31,39 +47,57 @@ public class MenuButton extends ReactiveButton {
     private void initialize(){
         //Set up the scaling transition on the black rectangle
         openAnim = new ScaleTransition(Duration.millis(500), black);
-        openAnim.setByX(2);
-        openAnim.setByY(2);
+        openAnim.setByX(1.25);
+        openAnim.setByY(8);
+
+        //Load in the menu once the animation has ended
+        this.openAnim.setOnFinished(event -> {
+            if(menu != null)
+                this.getChildren().add(menu);
+        });
+
+        closeAnim = new ScaleTransition(Duration.millis(500), black);
+        closeAnim.setByX(-1.25);
+        closeAnim.setByY(-8);
+
+        this.closeAnim.setOnFinished(event -> {
+            for(Node child : this.getChildren())
+                child.setVisible(true);
+        });
 
         //add event listeners to mouse press and button unfocus to open and close
         //the menu respectively
-        this.setOnMouseClicked(event -> open());
-        this.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue && oldValue){
-                close();
-            }
-        });
+        this.setOnMouseClicked(event -> clickHandler());
+    }
 
+    private void clickHandler(){
+        if(!this.isOpen.get()){
+            if(currentButton != null){
+                currentButton.close();
+                currentButton.isOpen.set(false);
+            }
+            this.open();
+            this.isOpen.set(true);
+            currentButton = this;
+        }
     }
 
     /**
      * Handles the opening of the menu when the button is clicked.
      */
     private void open(){
+        this.menu = new InputMenu();
+        this.menu.setMinWidth(175);
+        this.menu.setMinHeight(215);
         //Stop animation if the close animation is playing
-        this.openAnim.stop();
+        this.closeAnim.stop();
 
         //Unload all children of the anchorpane except for the black background
         for(Node child : this.getChildrenUnmodifiable())
             if(child != this.black)
-                this.getChildren().remove(child);
+                child.setVisible(false);
 
-        this.openAnim.setRate(1);
         this.openAnim.play();
-
-        //Add load menu code here*****************************************************************
-        InputMenu menu = new InputMenu();
-        this.getChildren().clear();
-        this.getChildren().add(menu);
     }
 
     /**
@@ -75,13 +109,18 @@ public class MenuButton extends ReactiveButton {
         if (this.openAnim.getStatus().equals(Status.RUNNING))
             this.openAnim.stop();
         else{
-            //Add unload menu code here**********************************************************
-            this.getChildren().clear();
+            this.getChildren().remove(menu);
+            this.menu = null;
         }
 
-        this.openAnim.setRate(-1);
-        this.openAnim.play();
+        this.closeAnim.play();
+    }
 
-        this.loadButtonFXML();
+    public boolean getOpen(){
+        return this.isOpen.get();
+    }
+
+    public BooleanProperty openProperty(){
+        return this.isOpen;
     }
 }
