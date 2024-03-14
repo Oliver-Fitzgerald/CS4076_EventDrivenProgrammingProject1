@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class Server {
     private static ServerSocket servSock;
@@ -14,7 +15,7 @@ public class Server {
     private static boolean loading;
 
     public static void main(String[] args) {
-        Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Connected Successfully"));
+        Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
         startServerLoadPrint.start();
 
         try {
@@ -24,8 +25,13 @@ public class Server {
             System.exit(1);
         }
         finally {
-
             loading = false;
+            try {
+                startServerLoadPrint.join();
+            }
+            catch(InterruptedException e){
+                System.out.println("Failed to join loading text");
+            }
         }
         run();
     }
@@ -75,9 +81,9 @@ public class Server {
                 }
             }
             catch(InterruptedException e){
-                System.out.println("\n" + endMessage);
-                Thread.currentThread().interrupt();
+                loading = false;
             }
+            System.out.println("\n" + endMessage);
         }
     }
 
@@ -91,39 +97,61 @@ public class Server {
         }
         @Override
         public void run(){
-            while(running) {
-                try(BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                    PrintWriter out = new PrintWriter(sock.getOutputStream())) {
-
-                    //I assume that the message passed will be a string.
-                    //I assume that it will start with three chars
-                    //indicating the operation to perform with the data after it
-                    //these codes being 'add' 'rem' or 'dis'
-                    //the format of the data and how it is handled after is up
-                    //to you.
-                    switch(in.readLine().substring(0, 3)){
-                        case "add": //add module
-                            break;
-                        case "rem": //remove module
-                            break;
-                        case "dis": //display class
-                            break;
-                        case "ter": //terminate connection
-                            try {
-                                System.out.println("Closing connection");
-                                sock.close();
-                            }catch(IOException e){
-                                System.out.println("Unable to close connection.");
-                                System.exit(1);
-                            }
-                            running = false;
-                            break;
+            try(BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+                PrintWriter out = new PrintWriter(sock.getOutputStream(), true)) {
+                while(running) {
+                    try {
+                        //I assume that the message passed will be a string.
+                        //I assume that it will start with three chars
+                        //indicating the operation to perform with the data after it
+                        //these codes being 'add' 'rem' or 'dis'
+                        //the format of the data and how it is handled after is up
+                        //to you.
+                        String message = in.readLine();
+                        String code = message.substring(0, 3);
+                        String data = message.substring(4);
+                        switch (code) {
+                            case "add": //add module
+                                System.out.println(data);
+                                out.println("10");
+                                break;
+                            case "rem": //remove module
+                                break;
+                            case "dis": //display class
+                                break;
+                            case "ter": //terminate connection
+                                try {
+                                    System.out.println("Closing connection");
+                                    sock.close();
+                                } catch (IOException e) {
+                                    System.out.println("Unable to close connection.");
+                                    System.exit(1);
+                                }
+                                running = false;
+                                break;
+                            default:
+                                throw new IncorrectActionException("-1");
+                        }
                     }
-                } catch (IOException e) {
-                    System.out.println("Error getting IO from client: ");
-                    e.printStackTrace();
+                    catch(IncorrectActionException e){
+                        out.println(e.getMessage());
+                    }
+                    catch(IOException e){
+                        System.out.println(e.getMessage());
+                        sock.close();
+                        running = false;
+                    }
+                    catch(NullPointerException e){
+                        System.out.println(e.getMessage());
+                        sock.close();
+                        running = false;
+                    }
                 }
+            } catch (IOException e) {
+                System.out.println("Error getting IO from client.");
+                running = false;
             }
+            System.out.println("Closing connection...");
         }
     }
 }

@@ -8,10 +8,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import java.time.format.DateTimeFormatter;
 
 public class InputMenu extends GridPane {
     private String[] suggestions = new String[24 * 4];
@@ -26,6 +28,8 @@ public class InputMenu extends GridPane {
     public ReactiveButton submitButton = new ReactiveButton("Book") ;
     private HBox codes = new HBox(getClass, getRoom) ;
     private VBox details = new VBox(datePicker, codes, getTime, submitButton) ;
+
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public InputMenu(){
 
@@ -61,17 +65,15 @@ public class InputMenu extends GridPane {
         this.add(heading,0,0);
 
         //Book button
-        userInput = "" ;
-        submitButton.setOnMouseClicked(event -> {
-            userInput += "Date:" + datePicker.getValue().toString() ;
-            userInput += ",ClassCode:" + getClass.getText();
-            userInput += ",RoomCode:" + getRoom.getText();
-            userInput += ",From:" + getTime.getValue();
+        submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            String date = datePicker.getValue() == null ? "" : datePicker.getValue().format(format).toString();
+            String module = getClass.getText() == null ? "" : getClass.getText();
+            String room = getRoom.getText() == null ? "" : getRoom.getText();
+            String time = getTime.getValue() == null ? "" : getTime.getValue().toString();
+            userInput = String.format("%s,%s,%s,%s", date, module, room, time);
 
-
+            fireEvent(new SubmitEvent(userInput));
         });
-
-
    }
 
     private static void autoFillBox(ComboBox box,String newValue ,String[] suggestions){

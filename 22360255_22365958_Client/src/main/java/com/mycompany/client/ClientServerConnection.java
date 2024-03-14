@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -11,18 +12,15 @@ import java.net.UnknownHostException;
 import static javafx.application.Application.launch;
 
 public class ClientServerConnection {
-    static InetAddress host;
-    static final int PORT = 1024; //0 -> 1023 are reserved
-    private static Client client ;
-    static boolean terminate = false ;
-
+    private InetAddress host;
+    private static final int PORT = 30572; //0 -> 1023 are reserved.
+    private Socket sock;
+    private PrintWriter out;
+    private BufferedReader in;
     /**
      * Opens connection with server
      **/
-    public void connect(Client client){
-
-        this.client = client ;
-
+    public ClientServerConnection(){
         try
         {
             host = InetAddress.getLocalHost(); //gets the local address of the device
@@ -33,49 +31,43 @@ public class ClientServerConnection {
             System.exit(-1);
         }
 
-        run();
-    }
-
-    public static void run(){
-        Socket link = null;
-
-        try
-        {
-            link = new Socket(host,PORT); //Opens socket and connects with server
+        try{
+            sock = new Socket(host, PORT);
+            out = new PrintWriter(sock.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }finally {
-
-            try
-            {
-                System.out.println("\n* Closing connection... *");
-                link.close(); //Closes connection with server
-
-            }catch(IOException e)
-            {
-                System.out.println("Unable to disconnect/close!");
-                System.exit(-1);
-            }
-
+        catch(IOException e){
+            System.out.println("Failed to connect to server. Exiting...");
+            System.exit(1);
         }
     }
 
-
-    public static String handle(String sendMessage,Socket link){
+    public String send(String toSend){
         String response = "";
-        try {
-            PrintWriter out = new PrintWriter(link.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-            String code = sendMessage.substring(0, 3);;
-
+        try{
+            out.println(toSend);
             //receive message
             response = in.readLine(); //response == 1 success;else exception message
         }
         catch (IOException e){
-            System.out.println("Whoopsy in handle");
+            e.printStackTrace();
         }
         return response;
+    }
+
+    public void terminate(){
+        this.out.close();
+        try {
+            this.in.close();
+        }
+        catch(IOException e){
+            System.out.println("Error closing BufferedReader.");
+        }
+        try {
+            this.sock.close();
+        }
+        catch(IOException e){
+            System.out.println("Error closing connection.");
+        }
     }
 }

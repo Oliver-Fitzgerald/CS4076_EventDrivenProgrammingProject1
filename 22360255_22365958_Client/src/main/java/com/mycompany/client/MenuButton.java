@@ -3,8 +3,7 @@ package com.mycompany.client;
 import javafx.animation.ScaleTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.Menu;
-import javafx.scene.transform.Scale;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.animation.Animation.Status;
@@ -129,5 +128,9 @@ public class MenuButton extends ReactiveButton {
 
     public BooleanProperty openProperty(){
         return this.isOpen;
+    }
+
+    public void setOnSubmitEvent(EventHandler<SubmitEvent> eventHandler){
+        addEventHandler(SubmitEvent.SUBMIT_EVENT_TYPE, eventHandler);
     }
 }

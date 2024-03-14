@@ -10,3 +10,10 @@ HBox {
 Scene {
     -fx-background-color: gray;
 }
+
+#serverLbl {
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+    -fx-font-family: Arial;
+    -fx-text-fill: black;
+}
