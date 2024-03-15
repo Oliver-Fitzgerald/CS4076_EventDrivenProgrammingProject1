@@ -14,17 +14,7 @@ public class ConnectScreen extends BorderPane {
     @FXML
     public ReactiveButton connectButton;
 
-    @FXML
-    private void initialize(){
-        connectButton.setText("Connect");
-    }
     public ConnectScreen(){
-        connectButton = new ReactiveButton();
-
-    }
-
-    public Scene connectScreen() {
-
         Scene scene = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnectScreen.fxml"));
         try {
@@ -36,7 +26,6 @@ public class ConnectScreen extends BorderPane {
             this.getStylesheets().add(getClass().getResource("connectScreenStyle.css").toExternalForm()) ;
             this.setStyle("-fx-background-color: #848A98");
         }catch (IOException e){
-            System.out.println("Failed to load connect screen");
             e.printStackTrace();
         }
 
