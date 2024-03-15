@@ -17,8 +17,6 @@ import java.time.format.DateTimeFormatter;
 
 public class InputMenu extends GridPane {
     private String[] suggestions = new String[24 * 4];
-    private String[] classList = {"Computer Systems(lm051)","Philosophy (mf041)","Mechanical Engineering (lm060)","Arts (mf042)"};
-    private String[] rooms =  {"Kemmy Business School G01","Kemmy Business School G02","Computer Science G001","Computer Science G002","Foundation Building 042",} ;
     private Label heading = new Label("Module Data");
     private String userInput = "";
     private DatePicker datePicker = new DatePicker() ;
