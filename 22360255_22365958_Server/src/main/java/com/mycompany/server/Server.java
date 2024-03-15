@@ -141,6 +141,21 @@ public class Server {
         return "";
     }
 
+    public static String displayCourse(String data) throws IncorrectActionException{
+        if(data.isEmpty() || data == null)
+            throw new IncorrectActionException("01");
+
+        for(Course c : courses){
+            System.out.println(c);
+            if(c.getCode().equals(data)){
+                System.out.println(c);
+                return "00";
+            }
+        }
+
+        throw new IncorrectActionException("02");
+    }
+
     private static String[] mySplit(String data, char regex){
         ArrayList<String> out = new ArrayList<>();
         String curString = "";

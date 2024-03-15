@@ -66,4 +66,16 @@ public class Course{
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString(){
+        String out = code + ":\n";
+
+        for(Module mod : modules){
+            if(mod != null)
+                out += mod + "\n";
+        }
+
+        return out.substring(0, out.length()-2);
+    }
 }

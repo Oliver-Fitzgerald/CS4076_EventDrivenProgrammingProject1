@@ -15,15 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import java.time.format.DateTimeFormatter;
 
-public class InputMenu extends GridPane {
+public class InputMenu extends Menu {
     private String[] suggestions = new String[24 * 4];
     private Label heading = new Label("Module Data");
     private DatePicker datePicker = new DatePicker() ;
     private TextField roomCode = new TextField() ;
-    private TextField courseCode = new TextField() ;
+    public TextField courseCode = new TextField() ;
     private TextField moduleCode = new TextField() ;
     private ComboBox<String> getTime = new ComboBox<String>() ;
-    public ReactiveButton submitButton = new ReactiveButton("Submit") ;
     private HBox codes = new HBox(courseCode, moduleCode) ;
     private VBox details = new VBox(datePicker,roomCode, codes, getTime, submitButton) ;
 

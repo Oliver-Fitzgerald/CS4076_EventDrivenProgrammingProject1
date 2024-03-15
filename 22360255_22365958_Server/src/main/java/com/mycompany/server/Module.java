@@ -57,6 +57,11 @@ public class Module {
                 startTime.equals(other.getStartTime());
     }
 
+    @Override
+    public String toString(){
+        return modCode + ": " + roomCode + " at " + startTime + " on " + date;
+    }
+
     public LocalDate getDate() {
         return date;
     }

@@ -19,7 +19,7 @@ public class Client extends Application{
     private final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     private MenuButton addBtn = new MenuButton("Add Class");
     private MenuButton removeBtn = new MenuButton("Remove Class");
-    private ReactiveButton displayBtn = new ReactiveButton("Display Class Information");
+    private MenuButton displayBtn = new MenuButton("Display Class Information");
     private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection");
     private ClientServerConnection con;
 
@@ -56,6 +56,13 @@ public class Client extends Application{
 
         removeBtn.setOnSubmitEvent(event -> {
             String response = con.send("rem:" + event.getEventData());
+
+            this.handleResponseCode(response);
+        });
+
+        displayBtn.makeCourseMenu();
+        displayBtn.setOnSubmitEvent(event -> {
+            String response = con.send("dis:" + event.getEventData());
 
             this.handleResponseCode(response);
         });
@@ -140,6 +147,20 @@ public class Client extends Application{
                 this.serverResponseLbl.setStyle("-fx-font-size: 24;");
 
             this.serverResponseLbl.setText(errorMessage);
+        }
+        else if(code.charAt(0) == '0'){
+            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+            switch(code.charAt(1)){
+                case '0':
+                    this.serverResponseLbl.setText("Succesfully displayed course");
+                    break;
+                case '1':
+                    this.serverResponseLbl.setText("Missing course code");
+                    break;
+                case '2':
+                    this.serverResponseLbl.setText("Course to display not found");
+                    break;
+            }
         }
     }
 }

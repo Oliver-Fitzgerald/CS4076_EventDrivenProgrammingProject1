@@ -16,6 +16,7 @@ public class IncorrectActionException extends Exception {
         0 = Display Action
             0 = Action performed successfully
             1 = Missing Course Code
+            2 = Course not found
         1 = Add
             0 = Action performed successfully
             1 = missing course code

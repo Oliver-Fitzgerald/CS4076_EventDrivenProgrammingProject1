@@ -4,18 +4,18 @@ import javafx.animation.ScaleTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.animation.Animation.Status;
+import javafx.scene.layout.GridPane;
 
 /**
  * The button used for add and remove class.
  * It opens a menu for input when the user clicks it playing an animation when it does so.
  */
 public class MenuButton extends ReactiveButton {
-
-
-    private InputMenu menu;
+    private Menu menu;
 
     /**
      * The scale transition of the black background.
@@ -33,6 +33,8 @@ public class MenuButton extends ReactiveButton {
      */
     private BooleanProperty isOpen = new SimpleBooleanProperty(false);
 
+    private boolean courseMenu = false;
+
     /**
      * Constructor for the menu button. It calls the initialization methods.
      * @param text The text which the button should display.
@@ -49,8 +51,6 @@ public class MenuButton extends ReactiveButton {
     private void initialize(){
         //Set up the scaling transition on the black rectangle
         openAnim = new ScaleTransition(Duration.millis(500), black);
-        openAnim.setByX(1.25);
-        openAnim.setByY(8);
 
         //Load in the menu once the animation has ended
         this.openAnim.setOnFinished(event -> {
@@ -59,8 +59,6 @@ public class MenuButton extends ReactiveButton {
         });
 
         closeAnim = new ScaleTransition(Duration.millis(500), black);
-        closeAnim.setByX(-1.25);
-        closeAnim.setByY(-8);
 
         this.closeAnim.setOnFinished(event -> {
             for(Node child : this.getChildren())
@@ -87,9 +85,29 @@ public class MenuButton extends ReactiveButton {
      * Handles the opening of the menu when the button is clicked.
      */
     private void open(){
-        this.menu = new InputMenu();
-        this.menu.setMinWidth(175);
-        this.menu.setMinHeight(215);
+        if(this.courseMenu){
+            this.menu = new CourseMenu();
+            this.menu.setMinWidth(100);
+            this.menu.setMinHeight(75);
+            this.menu.setAlignment(Pos.CENTER);
+
+            this.requestFocus();
+
+            this.openAnim.setByX(100 / this.text.getWidth());
+            this.openAnim.setByY(75 / this.text.getHeight());
+            this.closeAnim.setByX(-100 / this.text.getWidth());
+            this.closeAnim.setByY(-75 / this.text.getHeight());
+        }
+        else{
+            this.menu = new InputMenu();
+            this.menu.setMinWidth(175);
+            this.menu.setMinHeight(215);
+
+            this.openAnim.setByX(175 / this.text.getWidth());
+            this.openAnim.setByY(215 / this.text.getHeight());
+            this.closeAnim.setByX(-175 / this.text.getWidth());
+            this.closeAnim.setByY(-215 / this.text.getHeight());
+        }
         this.menu.submitButton.setOnMouseReleased(event -> close());
         //Stop animation if the close animation is playing
         this.closeAnim.stop();
@@ -131,5 +149,9 @@ public class MenuButton extends ReactiveButton {
 
     public void setOnSubmitEvent(EventHandler<SubmitEvent> eventHandler){
         addEventHandler(SubmitEvent.SUBMIT_EVENT_TYPE, eventHandler);
+    }
+
+    public void makeCourseMenu(){
+        this.courseMenu = true;
     }
 }

@@ -38,6 +38,8 @@ public class ClientHandler implements Runnable {
                         case "rem": //remove module
                             break;
                         case "dis": //display class
+                            out.println(Server.displayCourse(data));
+                            System.out.println("00");
                             break;
                         case "ter": //terminate connection
                             try {
