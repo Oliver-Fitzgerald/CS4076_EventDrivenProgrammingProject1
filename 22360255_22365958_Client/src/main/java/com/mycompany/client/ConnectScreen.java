@@ -23,13 +23,12 @@ public class ConnectScreen extends BorderPane {
 
             loader.load();
 
-            this.getStylesheets().add(String.valueOf(getClass().getResource("connectScreenStyle.css"))) ;
-
+            this.getStylesheets().add(getClass().getResource("connectScreenStyle.css").toExternalForm()) ;
+            this.setStyle("-fx-background-color: #848A98");
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-    public Scene generateScene() {
-        return new Scene(this, 500, 400);
+
+        connectButton.setText("Connect");
     }
 }
