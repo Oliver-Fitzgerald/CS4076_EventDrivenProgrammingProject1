@@ -12,7 +12,8 @@
 
 <BorderPane
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mycompany.client.ConnectScreen">
+            fx:controller="com.mycompany.client.ConnectScreen"
+            >
     <center>
     <ReactiveButton fx:id="connectButton" />
     </center>
