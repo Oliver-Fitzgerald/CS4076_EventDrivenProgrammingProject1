@@ -13,6 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 import java.time.format.DateTimeFormatter;
 
 public class InputMenu extends Menu {
@@ -22,7 +24,9 @@ public class InputMenu extends Menu {
     private TextField roomCode = new TextField() ;
     public TextField courseCode = new TextField() ;
     private TextField moduleCode = new TextField() ;
-    private ComboBox<String> getTime = new ComboBox<String>() ;
+    //This had to be scrapped last second as the selection stopped working sry :(
+    //private ComboBox<String> getTime = new ComboBox<String>() ;
+    private TextField getTime = new TextField();
     private HBox codes = new HBox(courseCode, moduleCode) ;
     private VBox details = new VBox(datePicker,roomCode, codes, getTime, submitButton) ;
 
@@ -51,10 +55,10 @@ public class InputMenu extends Menu {
         GridPane.setHalignment(heading, HPos.CENTER);
         GridPane.setHalignment(details,HPos.CENTER);
 
-        getTime.setEditable(true);
-        getTime.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
-            autoFillBox(getTime ,newValue,suggestions);
-        });
+        //getTime.setEditable(true);
+//        getTime.getEditor().textProperty().addListener((observable,oldValue,newValue)-> {
+//            autoFillBox(getTime ,newValue,suggestions);
+//        });
 
         details.setAlignment(Pos.CENTER);
 
@@ -69,11 +73,13 @@ public class InputMenu extends Menu {
             String module = moduleCode.getText() == null ? "" : moduleCode.getText();
             String room = roomCode.getText() == null ? "" : roomCode.getText() ;
 
-            String time = "";
-            if(getTime.getValue() == null)
-                time = getTime.getEditor().getText() == null ? "" : getTime.getEditor().getText();
-            else
-                time = getTime.getValue() == null ? "" : getTime.getValue();
+//            String time = "";
+//            if(getTime.getValue() == null)
+//                time = getTime.getEditor().getText() == null ? "" : getTime.getEditor().getText();
+//            else
+//                time = getTime.getValue() == null ? "" : getTime.getValue();
+
+            String time = getTime.getText() == null ? "" : getTime.getText();
 
             String userInput = String.format("%s,%s,%s,%s,%s", date, course, module, room, time);
 

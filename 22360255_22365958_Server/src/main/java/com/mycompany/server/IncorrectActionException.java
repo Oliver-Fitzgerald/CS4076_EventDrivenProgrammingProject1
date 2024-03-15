@@ -29,10 +29,11 @@ public class IncorrectActionException extends Exception {
         2 = Remove
             0 = Action performed successfully
             1 = Incorrect Date
-            2 = Incorrect module code
-            3 = Incorrect room code
-            4 = Incorrect time
-            5 = Couldn't find the module to remove
+            2 = Incorrect course code
+            3 = Incorrect module code
+            4 = Incorrect room code
+            5 = Incorrect time
+            6 = Couldn't find the module to remove
         3 = Terminate
             0 = Action performed successfully
      */

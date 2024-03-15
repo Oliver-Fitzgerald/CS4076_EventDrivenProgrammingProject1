@@ -159,33 +159,34 @@ public class Server {
     }
 
     public static String removeModule(String data)throws IncorrectActionException{
-        if (data.equals(""))
-            throw new IncorrectActionException("-2") ;
-
-        String[] splitData ;
-
-        try {
-            splitData = data.split(",", 0);
-        }catch (IndexOutOfBoundsException e){
-            throw new IncorrectActionException("-1") ;
+        //Creating a module from the data
+        Module toRemove;
+        String courseCode = "";
+        String[] splitData = mySplit(data, ',');
+        try{
+            courseCode = splitData[1];
+            toRemove = new Module(splitData[0], splitData[3], splitData[2], splitData[4]);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("splitData index out of bounds. data: " + Arrays.deepToString(splitData));
+            throw new IncorrectActionException("-1");
+        } catch(IncorrectActionException e){
+            if(courseCode.isEmpty())
+                throw new IncorrectActionException("2" + e.getMessage() + "1");
+            else
+                throw new IncorrectActionException("2" + e.getMessage());
         }
 
-        try{
-            boolean found = false ;
-        for (Course course:courses.getCourses()){
-            for (int i = 0; i < 5; i++) {
-                if (course.getModules()[i].getModCode().equals(splitData[2])) {
+        boolean found = false;
+        for (Course course : courses.getCourses()) {
+            for (int i = 0; i < course.getModCount(); i++) {
+                if (course.getModules()[i].equals(toRemove)) {
                     course.removeModule(i);
-                    found = true ;
+                    found = true;
                 }
             }
         }
-        if (found == false)
-            throw new IncorrectActionException("25") ;
-        }catch (IncorrectActionException e){
-            System.out.println("2" + e.getMessage() +"5");
-        }
-
+        if (!found)
+            throw new IncorrectActionException("26");
 
         return "20";
     }

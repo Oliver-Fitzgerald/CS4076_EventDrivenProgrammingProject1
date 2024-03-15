@@ -31,7 +31,7 @@ public class Course{
         modules[index] = null ;
         modCount-- ;
 
-        for (int i = index; i < 5;i++)
+        for (int i = index; i < modCount;i++)
             if (i + 1 < 5)
              modules[i] = modules[i + 1] ;
 
@@ -78,6 +78,8 @@ public class Course{
     public void setCode(String code) {
         this.code = code;
     }
+
+    public int getModCount(){ return modCount; }
 
     @Override
     public String toString(){

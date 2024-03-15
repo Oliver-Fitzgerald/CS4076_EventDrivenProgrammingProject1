@@ -5,7 +5,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -162,6 +161,45 @@ public class Client extends Application{
                     case '6':
                     case '7':
                         errorMessage += "Module overlaps with another scheduled module.\n";
+                        break;
+                }
+            }
+            //Resizing label font size depending on how big the error message is
+            if(errorMessage.length() > 120)
+                this.serverResponseLbl.setStyle("-fx-font-size: 12;");
+            else if(errorMessage.length() > 75)
+                this.serverResponseLbl.setStyle("-fx-font-size: 18;");
+            else
+                this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+
+            this.displayMsg(errorMessage);
+        }
+        else if(code.charAt(0) == '2'){
+            char[] errors = code.substring(1).toCharArray();
+            String errorMessage = "";
+
+            for(char ch : errors){
+                switch(ch){
+                    case '0':
+                        errorMessage += "Succesfully removed module";
+                        break;
+                    case '1':
+                        errorMessage += "Missing course code\n";
+                        break;
+                    case '2':
+                        errorMessage += "Incorrect/Missing date\n";
+                        break;
+                    case '3':
+                        errorMessage += "Incorrect/Missing module code\n";
+                        break;
+                    case '4':
+                        errorMessage += "Incorrect/Missing room code\n";
+                        break;
+                    case '5':
+                        errorMessage += "Incorrect/Missing time format\n";
+                        break;
+                    case '6':
+                        errorMessage += "Module to remove not found\n";
                         break;
                 }
             }
