@@ -3,19 +3,21 @@ package com.mycompany.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Server {
     private static ServerSocket servSock;
     private static final int PORT = 30572;
-    private static int numConnections = 0;
+    public static int numConnections = 0;
     private static boolean loading;
     private static ArrayList<Course> courses = new ArrayList<Course>();
 
     public static void main(String[] args) {
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
         startServerLoadPrint.start();
+
+        Thread checkInput = new Thread(new checkIn());
+        checkInput.start();
 
         try {
             servSock = new ServerSocket(PORT);
@@ -40,10 +42,9 @@ public class Server {
         while(loading){
             try{
                 Socket link = servSock.accept();
-                numConnections++;
-                System.out.println("Client " + numConnections + " connected.");
+                System.out.println("Client " + numConnections++ + " connected.");
 
-                Thread clientThread = new Thread(new ClientHandler(link));
+                Thread clientThread = new Thread(new ClientHandler(link, numConnections - 1));
                 clientThread.start();
             }catch(IOException e){
                 e.printStackTrace();
@@ -52,6 +53,15 @@ public class Server {
         }
     }
 
+    private static class checkIn implements Runnable {
+        @Override
+        public void run(){
+            Scanner sc = new Scanner(System.in);
+
+            if(sc.nextLine().toLowerCase().equals("q"))
+                closeServer();
+        }
+    }
     private static class loadingText implements Runnable {
         String startMessage;
         String endMessage;
@@ -170,5 +180,9 @@ public class Server {
         out.add(curString);
 
         return out.toArray(new String[0]);
+    }
+
+    private static void closeServer(){
+        System.exit(0);
     }
 }

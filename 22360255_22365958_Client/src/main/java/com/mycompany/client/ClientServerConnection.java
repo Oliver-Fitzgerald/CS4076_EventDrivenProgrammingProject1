@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 
 import static javafx.application.Application.launch;
 
@@ -47,7 +44,12 @@ public class ClientServerConnection {
         try{
             out.println(toSend);
             //receive message
-            response = in.readLine(); //response == 1 success;else exception message
+            try {
+                response = in.readLine();
+            } catch(SocketException e){
+                System.out.println("Server closed connection\nExiting...");
+                System.exit(1);
+            }
         }
         catch (IOException e){
             e.printStackTrace();

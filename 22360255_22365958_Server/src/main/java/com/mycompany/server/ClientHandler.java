@@ -8,17 +8,19 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
     private Socket sock;
+    private int id;
     private boolean running;
 
-    public ClientHandler(Socket sock){
+    public ClientHandler(Socket sock, int id){
         this.sock = sock;
+        this.id = id;
         this.running = true;
     }
     @Override
     public void run(){
         try(BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             PrintWriter out = new PrintWriter(sock.getOutputStream(), true)) {
-            while(running) {
+            while(this.running) {
                 try {
                     //I assume that the message passed will be a string.
                     //I assume that it will start with three chars
@@ -49,7 +51,7 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Unable to close connection.");
                                 System.exit(1);
                             }
-                            running = false;
+                            this.running = false;
                             break;
                         default:
                             throw new IncorrectActionException("-1");
@@ -62,18 +64,27 @@ public class ClientHandler implements Runnable {
                 catch(IOException e){
                     System.out.println(e.getMessage());
                     sock.close();
-                    running = false;
+                    this.running = false;
                 }
                 catch(NullPointerException e){
                     System.out.println("Client forcibly closed connection");
                     sock.close();
-                    running = false;
+                    this.running = false;
                 }
             }
         } catch (IOException e) {
             System.out.println("Error getting IO from client.");
-            running = false;
+            this.running = false;
         }
         System.out.println("Closing connection...");
+        if(!sock.isClosed()){
+            try{
+             sock.close();
+            } catch(IOException e){
+                System.out.println("");
+            }
+        }
+
+        this.running = false;
     }
 }
