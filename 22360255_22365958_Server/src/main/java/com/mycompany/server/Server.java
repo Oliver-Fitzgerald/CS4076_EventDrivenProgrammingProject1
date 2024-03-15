@@ -158,8 +158,27 @@ public class Server {
         return "10";
     }
 
-    public static String removeModule(String data){
-        return "";
+    public static String removeModule(String data)throws IncorrectActionException{
+        if (data.equals(""))
+            throw new IncorrectActionException("-2") ;
+
+        String courseCode = "";
+        String[] splitData ;
+
+        try {
+            splitData = data.split(",", 0);
+        }catch (IndexOutOfBoundsException e){
+            throw new IncorrectActionException("-1") ;
+        }
+
+        for (Course course:courses.getCourses()){
+            for (int i = 0; i < 5; i++) {
+                if (course.getModules()[i].getModCode().equals(splitData[2])) ;
+                    course.removeModule(course.getModules()[i]);
+            }
+        }
+
+        return "20";
     }
 
     public static String displayCourse(String data) throws IncorrectActionException{

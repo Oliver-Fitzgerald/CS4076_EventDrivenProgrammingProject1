@@ -27,8 +27,9 @@ public class Course{
         modCount++;
     }
 
-    public void removeModule() throws IncorrectActionException{
-
+    public void removeModule(Module module) throws IncorrectActionException{
+        for(int i = 0; i < 5;i++)
+            if
     }
 
     @Override

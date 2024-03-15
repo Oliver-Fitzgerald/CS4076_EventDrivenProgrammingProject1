@@ -37,6 +37,8 @@ public class ClientHandler implements Runnable {
                             System.out.println("10");
                             break;
                         case "rem": //remove module
+                            out.println(Server.removeModule(data));
+                            System.out.println("20");
                             break;
                         case "dis": //display class
                             out.println(Server.displayCourse(data));

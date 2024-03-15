@@ -10,7 +10,7 @@ import static javafx.application.Application.launch;
 
 public class ClientServerConnection {
     private InetAddress host;
-    private static final int PORT = 30572; //0 -> 1023 are reserved.
+    private static final int PORT = 30572;
     private Socket sock;
     private PrintWriter out;
     private BufferedReader in;
