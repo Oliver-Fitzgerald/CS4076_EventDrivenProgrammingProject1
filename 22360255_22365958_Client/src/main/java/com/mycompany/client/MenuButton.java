@@ -14,7 +14,6 @@ import javafx.animation.Animation.Status;
  */
 public class MenuButton extends ReactiveButton {
 
-    //message to be sent to the server
 
     private InputMenu menu;
 

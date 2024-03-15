@@ -26,7 +26,7 @@ public class Client extends Application{
      * This label is included in order to give the user responsiveness.
      * Things like "connection successful" and "added class succesfully"
      */
-    private Label serverResponseLbl = new Label("My Label");
+    private Label serverResponseLbl = new Label("");
 
 
     @Override

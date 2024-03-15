@@ -173,4 +173,5 @@ public class ReactiveButton extends StackPane {
         this.slide.play();
     }
 
+    public void setText(String text){initialize(text);}
 }
