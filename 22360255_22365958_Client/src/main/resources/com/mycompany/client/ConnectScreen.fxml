@@ -4,11 +4,10 @@
 <?import com.mycompany.client.ReactiveButton?>
 
 <?import javafx.scene.control.Button?>
-<BorderPane
+<fx:root type="BorderPane"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mycompany.client.ConnectScreen"
             >
     <center>
         <ReactiveButton fx:id="connectButton"/>
     </center>
-</BorderPane>
+</fx:root>

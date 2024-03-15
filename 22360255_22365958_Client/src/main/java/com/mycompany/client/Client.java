@@ -37,11 +37,7 @@ public class Client extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene command = createCommandScene() ;
-
         ConnectScreen connect = new ConnectScreen() ;
-        Scene intialScene = connect.connectScreen();
-
         connect.connectButton.setOnMouseClicked(event -> {
             con = new ClientServerConnection();
 
@@ -52,16 +48,12 @@ public class Client extends Application{
             this.displayMsg("Connected Succesfully");
         });
 
+        Scene intialScene = connect.generateScene();
+
         primaryStage.setTitle("Class scheduler");
         primaryStage.setScene(intialScene);
         primaryStage.show();
     }
-    public static void UIInitialization(Stage primaryStage, Scene intialScene){
-
-        primaryStage.setTitle("Class scheduler");
-        primaryStage.setScene(intialScene);
-    }
-
 
     public static void main(String[] args){
         launch();

@@ -5,28 +5,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ConnectScreen {
+public class ConnectScreen extends BorderPane {
     @FXML
     public ReactiveButton connectButton;
 
     public ConnectScreen(){
-        connectButton = new ReactiveButton();
-    }
-    public Scene connectScreen() {
         Scene scene = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnectScreen.fxml"));
         try {
-            scene = new Scene(loader.load(), 500, 400);
-            scene.getStylesheets().add(String.valueOf(getClass().getResource("connectScreenStyle.css"))) ;
+            loader.setRoot(this);
+            loader.setController(ConnectScreen.this);
+
+            loader.load();
+
+            this.getStylesheets().add(String.valueOf(getClass().getResource("connectScreenStyle.css"))) ;
 
         }catch (IOException e){
             e.printStackTrace();
         }
-
-        return scene;
+    }
+    public Scene generateScene() {
+        return new Scene(this, 500, 400);
     }
 }
