@@ -1,11 +1,15 @@
 package com.mycompany.server;
 
 import javax.swing.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+@XmlRootElement(name="module")
 public class Module {
     private LocalDate date;
     private String roomCode;
@@ -42,6 +46,10 @@ public class Module {
             throw new IncorrectActionException(toThrow);
     }
 
+    public Module(){
+
+    }
+
     @Override
     public boolean equals(Object obj){
         if(obj == this)
@@ -62,6 +70,8 @@ public class Module {
         return modCode + ": " + roomCode + " at " + startTime + " on " + date;
     }
 
+    @XmlElement(name="date")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getDate() {
         return date;
     }
@@ -70,6 +80,7 @@ public class Module {
         this.date = date;
     }
 
+    @XmlElement(name="roomCode")
     public String getRoomCode() {
         return roomCode;
     }
@@ -78,6 +89,7 @@ public class Module {
         this.roomCode = roomCode;
     }
 
+    @XmlElement(name="modCode")
     public String getModCode() {
         return modCode;
     }
@@ -86,6 +98,8 @@ public class Module {
         this.modCode = modCode;
     }
 
+    @XmlElement(name="startTime")
+    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -94,6 +108,8 @@ public class Module {
         this.startTime = startTime;
     }
 
+    @XmlElement(name="endTime")
+    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     public LocalTime getEndTime() {
         return endTime;
     }

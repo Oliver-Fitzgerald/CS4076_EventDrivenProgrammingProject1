@@ -1,8 +1,16 @@
 package com.mycompany.server;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Server {
@@ -10,7 +18,7 @@ public class Server {
     private static final int PORT = 30572;
     public static int numConnections = 0;
     private static boolean loading;
-    private static ArrayList<Course> courses = new ArrayList<Course>();
+    private static CourseList courses = new CourseList();
 
     public static void main(String[] args) {
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
@@ -34,6 +42,9 @@ public class Server {
                 System.out.println("Failed to join loading text");
             }
         }
+
+        loadCourses();
+
         run();
     }
 
@@ -155,7 +166,7 @@ public class Server {
         if(data.isEmpty() || data == null)
             throw new IncorrectActionException("01");
 
-        for(Course c : courses){
+        for(Course c : courses.getCourses()){
             if(c.getCode().equals(data)){
                 System.out.println(c);
                 return "00";
@@ -183,6 +194,50 @@ public class Server {
     }
 
     private static void closeServer(){
+        Path documentsDir = Paths.get(System.getProperty("user.home"), "Documents");
+        String folderName = "Class Scheduler";
+        Path newFolder = documentsDir.resolve(folderName);
+
+        if(!Files.exists(newFolder)){
+            try {
+                Files.createDirectory(newFolder);
+            } catch(IOException e){
+                System.out.println("Couldn't create save folder.");
+            }
+        }
+
+        try {
+            File file = newFolder.resolve("courses.xml").toFile();
+            JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(courses, file);
+        } catch(JAXBException e){
+            e.printStackTrace();
+        }
+
         System.exit(0);
+    }
+
+    private static void loadCourses(){
+        Path documentsDir = Paths.get(System.getProperty("user.home"), "Documents");
+        String folderName = "Class Scheduler";
+        Path newFolder = documentsDir.resolve(folderName);
+
+        if(!Files.exists(newFolder)){
+            courses = new CourseList();
+            return;
+        }
+
+        File file = newFolder.resolve("courses.xml").toFile();
+
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            courses = (CourseList) jaxbUnmarshaller.unmarshal(file);
+        } catch(JAXBException e){
+            System.out.println("Failed to unmarshall xml. No data read.");
+            courses = new CourseList();
+        }
     }
 }

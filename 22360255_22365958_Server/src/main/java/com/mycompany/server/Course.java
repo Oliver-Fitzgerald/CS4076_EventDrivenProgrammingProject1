@@ -1,5 +1,9 @@
 package com.mycompany.server;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="course")
 public class Course{
     private Module[] modules;
     private String code;
@@ -51,6 +55,7 @@ public class Course{
         return 0;
     }
 
+    @XmlElement(name="modules")
     public Module[] getModules() {
         return modules;
     }
@@ -59,6 +64,7 @@ public class Course{
         this.modules = modules;
     }
 
+    @XmlElement(name="courseCode")
     public String getCode() {
         return code;
     }
