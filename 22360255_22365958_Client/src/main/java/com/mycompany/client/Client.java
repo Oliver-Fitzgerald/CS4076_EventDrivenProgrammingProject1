@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -48,7 +49,7 @@ public class Client extends Application{
             this.displayMsg("Connected Succesfully");
         });
 
-        Scene intialScene = connect.generateScene();
+        Scene intialScene = new Scene(connect, screenBounds.getWidth()/1.6, screenBounds.getHeight()/1.6);
 
         primaryStage.setTitle("Class scheduler");
         primaryStage.setScene(intialScene);
@@ -106,9 +107,11 @@ public class Client extends Application{
 
         btnBox.prefWidthProperty().bind(Bindings.divide(menuBox.prefWidthProperty(), 1.5));
         btnBox.prefHeightProperty().bind(Bindings.divide(menuBox.prefHeightProperty(), 3));
-
-
         btnBox.spacingProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 5));
+
+        addBtn.minWidthProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 4));
+        removeBtn.minWidthProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 4));
+        displayBtn.minWidthProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 4));
 
         //Adding a stylesheet to the scene
         commandScene.getStylesheets().add(String.valueOf(Client.class.getResource("commandSceneStyleSheet.css")));
