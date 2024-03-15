@@ -39,21 +39,21 @@ public class Client extends Application{
     public void start(Stage primaryStage) throws Exception {
         Scene command = createCommandScene() ;
 
-<<<<<<< Updated upstream
-        this.displayMsg("Connected Succesfully");
-
-        primaryStage.setOnCloseRequest(event -> this.handleResponseCode(con.send("ter:---")));
-
-        Scene commandScene = createCommandScene();
-        primaryStage.setScene(commandScene);
-=======
-        ConnectScreen connect = new ConnectScreen(primaryStage,command) ;
+        ConnectScreen connect = new ConnectScreen() ;
         Scene intialScene = connect.connectScreen();
 
-        //UIInitialization(primaryStage,connectScene);
+        connect.connectButton.setOnMouseClicked(event -> {
+            con = new ClientServerConnection();
+
+            primaryStage.setOnCloseRequest(e -> this.handleResponseCode(con.send("ter:---")));
+
+            Scene commandScene = createCommandScene();
+            primaryStage.setScene(commandScene);
+            this.displayMsg("Connected Succesfully");
+        });
+
         primaryStage.setTitle("Class scheduler");
         primaryStage.setScene(intialScene);
->>>>>>> Stashed changes
         primaryStage.show();
     }
     public static void UIInitialization(Stage primaryStage, Scene intialScene){
