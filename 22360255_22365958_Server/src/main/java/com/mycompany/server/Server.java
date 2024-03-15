@@ -1,18 +1,17 @@
 package com.mycompany.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Server {
     private static ServerSocket servSock;
     private static final int PORT = 30572;
     private static int numConnections = 0;
     private static boolean loading;
+    private static ArrayList<Course> courses = new ArrayList<Course>();
 
     public static void main(String[] args) {
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
@@ -87,71 +86,75 @@ public class Server {
         }
     }
 
-    private static class ClientHandler implements Runnable {
-        private Socket sock;
-        private boolean running;
+    public static String addModule(String data) throws IncorrectActionException{
+        int courseIndex = -1;
 
-        public ClientHandler(Socket sock){
-            this.sock = sock;
-            this.running = true;
+        //Creating a module from the data
+        Module toAdd;
+        String courseCode = "";
+        String[] splitData = mySplit(data, ',');
+        try{
+            courseCode = splitData[1];
+            toAdd = new Module(splitData[0], splitData[3], splitData[2], splitData[4]);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("splitData index out of bounds. data: " + Arrays.deepToString(splitData));
+            throw new IncorrectActionException("-1");
+        } catch(IncorrectActionException e){
+            if(courseCode.isEmpty())
+                throw new IncorrectActionException("1" + e.getMessage() + "1");
+            else
+                throw new IncorrectActionException("1" + e.getMessage());
         }
-        @Override
-        public void run(){
-            try(BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                PrintWriter out = new PrintWriter(sock.getOutputStream(), true)) {
-                while(running) {
-                    try {
-                        //I assume that the message passed will be a string.
-                        //I assume that it will start with three chars
-                        //indicating the operation to perform with the data after it
-                        //these codes being 'add' 'rem' or 'dis'
-                        //the format of the data and how it is handled after is up
-                        //to you.
-                        String message = in.readLine();
-                        String code = message.substring(0, 3);
-                        String data = message.substring(4);
-                        switch (code) {
-                            case "add": //add module
-                                System.out.println(data);
-                                out.println("10");
-                                break;
-                            case "rem": //remove module
-                                break;
-                            case "dis": //display class
-                                break;
-                            case "ter": //terminate connection
-                                try {
-                                    System.out.println("Closing connection");
-                                    sock.close();
-                                } catch (IOException e) {
-                                    System.out.println("Unable to close connection.");
-                                    System.exit(1);
-                                }
-                                running = false;
-                                break;
-                            default:
-                                throw new IncorrectActionException("-1");
-                        }
-                    }
-                    catch(IncorrectActionException e){
-                        out.println(e.getMessage());
-                    }
-                    catch(IOException e){
-                        System.out.println(e.getMessage());
-                        sock.close();
-                        running = false;
-                    }
-                    catch(NullPointerException e){
-                        System.out.println(e.getMessage());
-                        sock.close();
-                        running = false;
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println("Error getting IO from client.");
-                running = false;
+
+        if(courseCode.isEmpty()){
+            throw new IncorrectActionException("11");
+        }
+
+        //Check for different types of module overlap
+        for(int i = 0; i < courses.size(); i++){
+            Course cs = courses.get(i);
+            int overlap = cs.overlaps(toAdd);
+            if(cs.getCode().equals(courseCode)){
+                courseIndex = i;
+                if(overlap == 1 || overlap == 2)
+                    throw new IncorrectActionException("16");
             }
-            System.out.println("Closing connection...");
+            else if(overlap == 2){
+                throw new IncorrectActionException("17");
+            }
         }
+
+        //Adding the module to a course given no overlap
+        if(courseIndex != -1)
+            courses.get(courseIndex).addModule(toAdd);
+        else {
+            Course newCourse = new Course(courseCode);
+            newCourse.addModule(toAdd);
+            courses.add(newCourse);
+        }
+
+        //return success code
+        return "10";
+    }
+
+    public static String removeModule(String data){
+        return "";
+    }
+
+    private static String[] mySplit(String data, char regex){
+        ArrayList<String> out = new ArrayList<>();
+        String curString = "";
+        for(char ch : data.toCharArray()){
+            if(ch == regex) {
+                out.add(curString);
+                curString = "";
+            }
+            else
+                curString += ch;
+        }
+
+        out.add(curString);
+
+        return out.toArray(new String[0]);
     }
 }

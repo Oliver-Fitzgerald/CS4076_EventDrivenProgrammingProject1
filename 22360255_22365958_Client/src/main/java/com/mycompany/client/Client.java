@@ -5,6 +5,7 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -53,12 +54,18 @@ public class Client extends Application{
             this.handleResponseCode(response);
         });
 
+        removeBtn.setOnSubmitEvent(event -> {
+            String response = con.send("rem:" + event.getEventData());
+
+            this.handleResponseCode(response);
+        });
+
         serverResponseLbl.setId("serverLbl");
 
         //Here we create the basic layout structure of the scene.
         HBox btnBox = new HBox(addBtn, removeBtn, displayBtn);
         VBox menuBox = new VBox(btnBox, terminateBtn, serverResponseLbl);
-        Scene commandScene = new Scene(menuBox, screenBounds.getWidth()/1.8, screenBounds.getHeight()/1.8);
+        Scene commandScene = new Scene(menuBox, screenBounds.getWidth()/1.6, screenBounds.getHeight()/1.6);
 
         //As I've learned spacing should be done in the java not the css
         //due to bindings(can't have percentages in javafx css, as opposed to normal)
@@ -90,6 +97,9 @@ public class Client extends Application{
             con.terminate();
             System.exit(1);
         }
+        else if(code.equals("-2")){
+            this.serverResponseLbl.setText("No data entered");
+        }
         else if(code.charAt(0) == '1'){
             char[] errors = code.substring(1).toCharArray();
             String errorMessage = "";
@@ -100,22 +110,34 @@ public class Client extends Application{
                         errorMessage += "Succesfully added module";
                         break;
                     case '1':
-                        errorMessage += "Incorrect date format\n";
+                        errorMessage += "Missing course code\n";
                         break;
                     case '2':
-                        errorMessage += "Incorrect module code\n";
+                        errorMessage += "Incorrect/Missing date\n";
                         break;
                     case '3':
-                        errorMessage += "Incorrect room code\n";
+                        errorMessage += "Incorrect/Missing module code\n";
                         break;
                     case '4':
-                        errorMessage += "Incorrect time format\n";
+                        errorMessage += "Incorrect/Missing room code\n";
                         break;
                     case '5':
+                        errorMessage += "Incorrect/Missing time format\n";
+                        break;
+                    case '6':
+                    case '7':
                         errorMessage += "Module overlaps with another scheduled module.\n";
                         break;
                 }
             }
+            System.out.println(errorMessage.length());
+            //Resizing label font size depending on how big the error message is
+            if(errorMessage.length() > 120)
+                this.serverResponseLbl.setStyle("-fx-font-size: 12;");
+            else if(errorMessage.length() > 75)
+                this.serverResponseLbl.setStyle("-fx-font-size: 18;");
+            else
+                this.serverResponseLbl.setStyle("-fx-font-size: 24;");
 
             this.serverResponseLbl.setText(errorMessage);
         }

@@ -1,26 +1,60 @@
 package com.mycompany.server;
 
+import javax.swing.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Module {
     private LocalDate date;
     private String roomCode;
     private String modCode;
-    private String startTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    public Module(String date, String roomCode, String modCode, String startTime){
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public Module(String date, String roomCode, String modCode, String startTime) throws IncorrectActionException{
+        //Check if data is correct before making the module
+        String toThrow = "";
+
+        try {
+            this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch(DateTimeParseException e){
+            toThrow += "2";
+        }
+
+        if(roomCode.isEmpty())
+            toThrow += "4";
         this.roomCode = roomCode;
+
+        if(modCode.isEmpty())
+            toThrow += "3";
         this.modCode = modCode;
-        this.startTime = startTime;
+
+        try {
+            this.startTime = LocalTime.parse(startTime);
+            this.endTime = this.startTime.plusMinutes(50);
+        } catch(DateTimeParseException e){
+            toThrow += "5";
+        }
+
+        if(!toThrow.isEmpty())
+            throw new IncorrectActionException(toThrow);
     }
 
-    public Module(){
-        this.date = LocalDate.now();
-        this.roomCode = "";
-        this.modCode = "";
-        this.startTime = "";
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this)
+            return true;
+
+        if(obj == null && getClass() != obj.getClass())
+            return false;
+
+        Module other = (Module) obj;
+        return date.equals(other.getDate()) &&
+                roomCode.equals(other.getRoomCode()) &&
+                modCode.equals(other.getModCode()) &&
+                startTime.equals(other.getStartTime());
     }
 
     public LocalDate getDate() {
@@ -47,11 +81,19 @@ public class Module {
         this.modCode = modCode;
     }
 
-    public String getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }

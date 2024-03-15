@@ -20,7 +20,6 @@ public class InputMenu extends GridPane {
     private String[] classList = {"Computer Systems(lm051)","Philosophy (mf041)","Mechanical Engineering (lm060)","Arts (mf042)"};
     private String[] rooms =  {"Kemmy Business School G01","Kemmy Business School G02","Computer Science G001","Computer Science G002","Foundation Building 042",} ;
     private Label heading = new Label("Module Data");
-    private String userInput = "";
     private DatePicker datePicker = new DatePicker() ;
     private TextField roomCode = new TextField() ;
     private TextField courseCode = new TextField() ;
@@ -72,8 +71,14 @@ public class InputMenu extends GridPane {
             String course = courseCode.getText() == null ? "" : courseCode.getText();
             String module = moduleCode.getText() == null ? "" : moduleCode.getText();
             String room = roomCode.getText() == null ? "" : roomCode.getText() ;
-            String time = getTime.getValue() == null ? "" : getTime.getValue().toString();
-            userInput = String.format("%s,%s,%s,%s,%s", date, course, module, room, time);
+
+            String time = "";
+            if(getTime.getValue() == null)
+                time = getTime.getEditor().getText() == null ? "" : getTime.getEditor().getText();
+            else
+                time = getTime.getValue() == null ? "" : getTime.getValue();
+
+            String userInput = String.format("%s,%s,%s,%s,%s", date, course, module, room, time);
 
             fireEvent(new SubmitEvent(userInput));
         });
