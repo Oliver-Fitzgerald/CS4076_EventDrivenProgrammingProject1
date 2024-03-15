@@ -25,7 +25,8 @@ public class Client extends Application{
     private MenuButton removeBtn = new MenuButton("Remove Class");
     private MenuButton displayBtn = new MenuButton("Display Class Information");
     private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection");
-    private ClientServerConnection con;
+    private ClientServerConnection con ;
+    public static boolean connected = false ;
 
     /**
      * This label is included in order to give the user responsiveness.
@@ -36,16 +37,31 @@ public class Client extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        con = new ClientServerConnection();
+        Scene command = createCommandScene() ;
 
+<<<<<<< Updated upstream
         this.displayMsg("Connected Succesfully");
 
         primaryStage.setOnCloseRequest(event -> this.handleResponseCode(con.send("ter:---")));
 
         Scene commandScene = createCommandScene();
         primaryStage.setScene(commandScene);
+=======
+        ConnectScreen connect = new ConnectScreen(primaryStage,command) ;
+        Scene intialScene = connect.connectScreen();
+
+        //UIInitialization(primaryStage,connectScene);
+        primaryStage.setTitle("Class scheduler");
+        primaryStage.setScene(intialScene);
+>>>>>>> Stashed changes
         primaryStage.show();
     }
+    public static void UIInitialization(Stage primaryStage, Scene intialScene){
+
+        primaryStage.setTitle("Class scheduler");
+        primaryStage.setScene(intialScene);
+    }
+
 
     public static void main(String[] args){
         launch();
@@ -98,6 +114,7 @@ public class Client extends Application{
 
         btnBox.prefWidthProperty().bind(Bindings.divide(menuBox.prefWidthProperty(), 1.5));
         btnBox.prefHeightProperty().bind(Bindings.divide(menuBox.prefHeightProperty(), 3));
+
 
         btnBox.spacingProperty().bind(Bindings.divide(btnBox.prefWidthProperty(), 5));
 
