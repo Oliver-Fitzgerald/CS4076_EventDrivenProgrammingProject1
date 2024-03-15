@@ -162,7 +162,6 @@ public class Server {
         if (data.equals(""))
             throw new IncorrectActionException("-2") ;
 
-        String courseCode = "";
         String[] splitData ;
 
         try {
@@ -171,12 +170,22 @@ public class Server {
             throw new IncorrectActionException("-1") ;
         }
 
+        try{
+            boolean found = false ;
         for (Course course:courses.getCourses()){
             for (int i = 0; i < 5; i++) {
-                if (course.getModules()[i].getModCode().equals(splitData[2])) ;
-                    course.removeModule(course.getModules()[i]);
+                if (course.getModules()[i].getModCode().equals(splitData[2])) {
+                    course.removeModule(i);
+                    found = true ;
+                }
             }
         }
+        if (found == false)
+            throw new IncorrectActionException("25") ;
+        }catch (IncorrectActionException e){
+            System.out.println("2" + e.getMessage() +"5");
+        }
+
 
         return "20";
     }

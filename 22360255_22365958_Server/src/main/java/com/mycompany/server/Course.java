@@ -27,9 +27,14 @@ public class Course{
         modCount++;
     }
 
-    public void removeModule(Module module) throws IncorrectActionException{
-        for(int i = 0; i < 5;i++)
-            if
+    public void removeModule(int index) throws IncorrectActionException{
+        modules[index] = null ;
+        modCount-- ;
+
+        for (int i = index; i < 5;i++)
+            if (i + 1 < 5)
+             modules[i] = modules[i + 1] ;
+
     }
 
     @Override
