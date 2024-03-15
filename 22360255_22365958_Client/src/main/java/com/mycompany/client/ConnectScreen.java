@@ -13,9 +13,15 @@ public class ConnectScreen {
     @FXML
     public ReactiveButton connectButton;
 
+    @FXML
+    private void initialize(){
+        connectButton.setText("Connect");
+    }
     public ConnectScreen(){
         connectButton = new ReactiveButton();
+
     }
+
     public Scene connectScreen() {
         Scene scene = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnectScreen.fxml"));
@@ -24,6 +30,7 @@ public class ConnectScreen {
             scene.getStylesheets().add(String.valueOf(getClass().getResource("connectScreenStyle.css"))) ;
 
         }catch (IOException e){
+            System.out.println("Failed to load connect screen");
             e.printStackTrace();
         }
 
