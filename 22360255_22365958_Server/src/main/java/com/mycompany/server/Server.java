@@ -146,7 +146,6 @@ public class Server {
             throw new IncorrectActionException("01");
 
         for(Course c : courses){
-            System.out.println(c);
             if(c.getCode().equals(data)){
                 System.out.println(c);
                 return "00";

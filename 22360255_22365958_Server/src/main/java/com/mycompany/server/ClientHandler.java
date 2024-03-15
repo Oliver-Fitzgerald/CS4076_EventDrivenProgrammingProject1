@@ -27,7 +27,6 @@ public class ClientHandler implements Runnable {
                     //the format of the data and how it is handled after is up
                     //to you.
                     String message = in.readLine();
-                    System.out.println(message);
                     String code = message.substring(0, 3);
                     String data = message.substring(4);
                     switch (code) {
@@ -43,7 +42,8 @@ public class ClientHandler implements Runnable {
                             break;
                         case "ter": //terminate connection
                             try {
-                                System.out.println("Closing connection");
+                                out.println("30");
+                                System.out.println("Terminate connection received");
                                 sock.close();
                             } catch (IOException e) {
                                 System.out.println("Unable to close connection.");
@@ -65,7 +65,7 @@ public class ClientHandler implements Runnable {
                     running = false;
                 }
                 catch(NullPointerException e){
-                    System.out.println(e.getMessage());
+                    System.out.println("Client forcibly closed connection");
                     sock.close();
                     running = false;
                 }

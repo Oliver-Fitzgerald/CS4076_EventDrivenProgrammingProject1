@@ -1,15 +1,19 @@
 package com.mycompany.client;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.geometry.Rectangle2D;
+import javafx.util.Duration;
 
 /**
  * Our entry point to the client gui application.
@@ -33,6 +37,10 @@ public class Client extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         con = new ClientServerConnection();
+
+        this.displayMsg("Connected Succesfully");
+
+        primaryStage.setOnCloseRequest(event -> this.handleResponseCode(con.send("ter:---")));
 
         Scene commandScene = createCommandScene();
         primaryStage.setScene(commandScene);
@@ -67,6 +75,12 @@ public class Client extends Application{
             this.handleResponseCode(response);
         });
 
+        terminateBtn.setOnMouseClicked(event -> {
+            String response = con.send("ter:---");
+
+            this.handleResponseCode(response);
+        });
+
         serverResponseLbl.setId("serverLbl");
 
         //Here we create the basic layout structure of the scene.
@@ -95,7 +109,8 @@ public class Client extends Application{
 
     private void handleResponseCode(String code){
         if(code.equals("-1")){
-            this.serverResponseLbl.setText("Fatal error\nExiting...");
+            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+            this.displayMsg("Fatal error\nExiting...");
             try {
                 Thread.sleep(1000);
             }catch(InterruptedException e){
@@ -105,7 +120,8 @@ public class Client extends Application{
             System.exit(1);
         }
         else if(code.equals("-2")){
-            this.serverResponseLbl.setText("No data entered");
+            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+            this.displayMsg("No data entered");
         }
         else if(code.charAt(0) == '1'){
             char[] errors = code.substring(1).toCharArray();
@@ -137,7 +153,6 @@ public class Client extends Application{
                         break;
                 }
             }
-            System.out.println(errorMessage.length());
             //Resizing label font size depending on how big the error message is
             if(errorMessage.length() > 120)
                 this.serverResponseLbl.setStyle("-fx-font-size: 12;");
@@ -146,21 +161,54 @@ public class Client extends Application{
             else
                 this.serverResponseLbl.setStyle("-fx-font-size: 24;");
 
-            this.serverResponseLbl.setText(errorMessage);
+            this.displayMsg(errorMessage);
         }
         else if(code.charAt(0) == '0'){
             this.serverResponseLbl.setStyle("-fx-font-size: 24;");
             switch(code.charAt(1)){
                 case '0':
-                    this.serverResponseLbl.setText("Succesfully displayed course");
+                    this.displayMsg("Succesfully displayed course");
                     break;
                 case '1':
-                    this.serverResponseLbl.setText("Missing course code");
+                    this.displayMsg("Missing course code");
                     break;
                 case '2':
-                    this.serverResponseLbl.setText("Course to display not found");
+                    this.displayMsg("Course to display not found");
                     break;
             }
         }
+        else if(code.charAt(0) == '3'){
+            closeApp();
+        }
+    }
+
+    private void displayMsg(String msg){
+        serverResponseLbl.setText(msg);
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), serverResponseLbl);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        pause.setOnFinished(e -> fadeOut.play());
+        fadeOut.setOnFinished(e -> {
+            this.serverResponseLbl.setText("");
+            this.serverResponseLbl.setOpacity(1.0);
+        });
+
+        pause.play();
+    }
+
+    private void closeApp(){
+        this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+        this.displayMsg("Closing connection & shutting off");
+
+        con.terminate();
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+            System.exit(0);
+        }));
+        timeline.play();
     }
 }
