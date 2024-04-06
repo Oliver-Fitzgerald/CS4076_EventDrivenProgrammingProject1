@@ -10,6 +10,7 @@ public class ClientHandler implements Runnable {
     private Socket sock;
     private int id;
     private boolean running;
+    private static boolean earlyMorning = false ;
 
     public ClientHandler(Socket sock, int id){
         this.sock = sock;
@@ -41,8 +42,11 @@ public class ClientHandler implements Runnable {
                             System.out.println("20");
                             break;
                         case "dis": //display class
-                            out.println(Server.displayCourse(data));
+                            out.println(Server.displayCourse(data,earlyMorning));
                             System.out.println("00");
+                            break;
+                        case "ear": //early morning (set off by default)
+                            earlyMorning = earlyMorning ? false:true ;
                             break;
                         case "ter": //terminate connection
                             try {

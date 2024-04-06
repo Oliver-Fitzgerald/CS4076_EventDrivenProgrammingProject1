@@ -31,4 +31,5 @@ public class CourseList {
     public int size(){
         return this.courses.size();
     }
+
 }

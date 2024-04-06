@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +17,7 @@ public class Module {
     private String modCode;
     private LocalTime startTime;
     private LocalTime endTime;
+    private DayOfWeek day;
 
     public Module(String date, String roomCode, String modCode, String startTime) throws IncorrectActionException{
         //Check if data is correct before making the module
@@ -23,6 +25,7 @@ public class Module {
 
         try {
             this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            day = this.date.getDayOfWeek() ;
         } catch(DateTimeParseException e){
             toThrow += "2";
         }
@@ -41,7 +44,6 @@ public class Module {
         } catch(DateTimeParseException e){
             toThrow += "5";
         }
-
         if(!toThrow.isEmpty())
             throw new IncorrectActionException(toThrow);
     }
@@ -117,4 +119,5 @@ public class Module {
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
+    public DayOfWeek getDay(){return day;}
 }

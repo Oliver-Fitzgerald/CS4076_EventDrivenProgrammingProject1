@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 
 public class Server {
     private static ServerSocket servSock;
@@ -191,12 +192,16 @@ public class Server {
         return "20";
     }
 
-    public static String displayCourse(String data) throws IncorrectActionException{
+    public static String displayCourse(String data,boolean earlyMorning) throws IncorrectActionException{
         if(data.isEmpty() || data == null)
             throw new IncorrectActionException("01");
 
         for(Course c : courses.getCourses()){
+
             if(c.getCode().equals(data)){
+                if (earlyMorning)
+                    ForkJoinPool.commonPool().invoke(new EarlyMorning(courses)) ;
+
                 System.out.println(c);
                 return "00";
             }
