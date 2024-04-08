@@ -199,8 +199,25 @@ public class Server {
         for(Course c : courses.getCourses()){
 
             if(c.getCode().equals(data)){
-                if (earlyMorning)
-                    ForkJoinPool.commonPool().invoke(new EarlyMorning(courses)) ;
+                if (earlyMorning) {
+
+                    ArrayList<Module>[] days = new ArrayList[7] ;
+                    for (int i = 0; i < 7; i++)
+                        days[i] = new ArrayList<Module>() ;
+
+                    //Add modules to relevant day
+                    for (Course course:courses.getCourses()) {
+                        for (int i = 0; i < course.getModCount(); i++) {
+                            int day = course.getModules()[i].getDate().getDayOfWeek().getValue();
+                            days[day].add(course.getModules()[i]);
+
+                        }
+                    }
+
+                    //Sort each days classes by time
+                    for (int i = 0; i < 7; i++)
+                        ForkJoinPool.commonPool().invoke(new EarlyMorning(  (Module[]) days[0].toArray(),0,days[0].size()));
+                }
 
                 System.out.println(c);
                 return "00";
