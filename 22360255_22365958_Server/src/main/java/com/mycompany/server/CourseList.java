@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 @XmlRootElement(name="courseList")
 public class CourseList {
-    private ArrayList<Course> courses;
+    private volatile ArrayList<Course> courses;
 
     public CourseList(){
         courses = new ArrayList<>();
@@ -16,11 +16,11 @@ public class CourseList {
         return courses;
     }
 
-    public boolean add(Course c){
+    public synchronized boolean add(Course c){
         return this.courses.add(c);
     }
 
-    public boolean remove(Course c){
+    public synchronized boolean remove(Course c){
         return this.courses.remove(c);
     }
 

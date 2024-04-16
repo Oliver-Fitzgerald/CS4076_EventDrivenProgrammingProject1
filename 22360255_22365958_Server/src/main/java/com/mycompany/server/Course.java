@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="course")
 public class Course{
-    private Module[] modules;
+    private volatile Module[] modules;
     private String code;
     private int modCount = 0;
 
@@ -22,12 +22,12 @@ public class Course{
         this(new Module[5], "");
     }
 
-    public void addModule(Module mod) {
+    public synchronized void addModule(Module mod) {
         this.modules[modCount] = mod;
         modCount++;
     }
 
-    public void removeModule(int index) throws IncorrectActionException{
+    public synchronized void removeModule(int index) throws IncorrectActionException{
         modules[index] = null ;
         modCount-- ;
 

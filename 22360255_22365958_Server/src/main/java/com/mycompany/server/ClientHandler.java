@@ -46,7 +46,7 @@ public class ClientHandler implements Runnable {
                             System.out.println("00");
                             break;
                         case "ear": //early morning (set off by default)
-                            earlyMorning = earlyMorning ? false:true ;
+                            earlyMorning = !earlyMorning;
                             break;
                         case "ter": //terminate connection
                             try {

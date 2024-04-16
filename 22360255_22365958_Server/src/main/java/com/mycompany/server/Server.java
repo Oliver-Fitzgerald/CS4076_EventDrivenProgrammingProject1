@@ -20,6 +20,8 @@ public class Server {
     public static int numConnections = 0;
     private static boolean loading;
     private static CourseList courses = new CourseList();
+    private static final Object addLock = new Object();
+    private static final Object removeLock = new Object();
 
     public static void main(String[] args) {
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
@@ -146,20 +148,22 @@ public class Server {
             }
         }
 
-        //Adding the module to a course given no overlap
-        if(courseIndex != -1)
-            courses.get(courseIndex).addModule(toAdd);
-        else {
-            Course newCourse = new Course(courseCode);
-            newCourse.addModule(toAdd);
-            courses.add(newCourse);
+        synchronized (addLock) {
+            //Adding the module to a course given no overlap
+            if (courseIndex != -1)
+                courses.get(courseIndex).addModule(toAdd);
+            else {
+                Course newCourse = new Course(courseCode);
+                newCourse.addModule(toAdd);
+                courses.add(newCourse);
+            }
         }
 
         //return success code
         return "10";
     }
 
-    public static String removeModule(String data)throws IncorrectActionException{
+    public static String removeModule(String data) throws IncorrectActionException{
         //Creating a module from the data
         Module toRemove;
         String courseCode = "";
