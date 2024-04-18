@@ -20,8 +20,7 @@ public class Server {
     public static int numConnections = 0;
     private static boolean loading;
     private static CourseList courses = new CourseList();
-    private static final Object addLock = new Object();
-    private static final Object removeLock = new Object();
+    private static final Object lock = new Object();
 
     public static void main(String[] args) {
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
@@ -72,8 +71,10 @@ public class Server {
         public void run(){
             Scanner sc = new Scanner(System.in);
 
-            if(sc.nextLine().toLowerCase().equals("q"))
+            if(sc.nextLine().toLowerCase().equals("q")) {
+                System.out.println("Closing correctly");
                 closeServer();
+            }
         }
     }
     private static class loadingText implements Runnable {
@@ -148,7 +149,7 @@ public class Server {
             }
         }
 
-        synchronized (addLock) {
+        synchronized (lock) {
             //Adding the module to a course given no overlap
             if (courseIndex != -1)
                 courses.get(courseIndex).addModule(toAdd);
@@ -182,11 +183,14 @@ public class Server {
         }
 
         boolean found = false;
-        for (Course course : courses.getCourses()) {
-            for (int i = 0; i < course.getModCount(); i++) {
-                if (course.getModules()[i].equals(toRemove)) {
-                    course.removeModule(i);
-                    found = true;
+
+        synchronized (lock) {
+            for (Course course : courses.getCourses()) {
+                for (int i = 0; i < course.getModCount(); i++) {
+                    if (course.getModules()[i].equals(toRemove)) {
+                        course.removeModule(i);
+                        found = true;
+                    }
                 }
             }
         }
@@ -248,7 +252,7 @@ public class Server {
         return out.toArray(new String[0]);
     }
 
-    private static void closeServer(){
+    public static void closeServer(){
         Path documentsDir = Paths.get(System.getProperty("user.home"), "Documents");
         String folderName = "Class Scheduler";
         Path newFolder = documentsDir.resolve(folderName);

@@ -35,15 +35,15 @@ public class ClientHandler implements Runnable {
                     switch (code) {
                         case "add": //add module
                             out.println(Server.addModule(data));
-                            System.out.println("10");
+                            System.out.println(id + ": " + "10");
                             break;
                         case "rem": //remove module
                             out.println(Server.removeModule(data));
-                            System.out.println("20");
+                            System.out.println(id + ": " + "20");
                             break;
                         case "dis": //display class
                             out.println(Server.displayCourse(data,earlyMorning));
-                            System.out.println("00");
+                            System.out.println(id + ": " + "00");
                             break;
                         case "ear": //early morning (set off by default)
                             earlyMorning = !earlyMorning;
@@ -51,10 +51,10 @@ public class ClientHandler implements Runnable {
                         case "ter": //terminate connection
                             try {
                                 out.println("30");
-                                System.out.println("Terminate connection received");
+                                System.out.println(id + ": " + "Terminate connection received");
                                 sock.close();
                             } catch (IOException e) {
-                                System.out.println("Unable to close connection.");
+                                System.out.println(id + ": " + "Unable to close connection.");
                                 System.exit(1);
                             }
                             this.running = false;
@@ -73,16 +73,16 @@ public class ClientHandler implements Runnable {
                     this.running = false;
                 }
                 catch(NullPointerException e){
-                    System.out.println("Client forcibly closed connection");
+                    System.out.println(id + ": " + "Client forcibly closed connection");
                     sock.close();
                     this.running = false;
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error getting IO from client.");
+            System.out.println(id + ": " + "Error getting IO from client.");
             this.running = false;
         }
-        System.out.println("Closing connection...");
+        System.out.println(id + ": " + "Closing connection...");
         if(!sock.isClosed()){
             try{
              sock.close();
