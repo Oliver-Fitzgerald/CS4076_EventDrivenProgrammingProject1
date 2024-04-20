@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.beans.NamedArg;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,7 @@ public class ReactiveButton extends StackPane {
      * Initializes the components of the button including setting width, height, position, event handlers and so on.
      * @param text The button's text string.
      */
+    @FXML
     public void initialize(String text){
         //We set the Label's text initially as whatever the size the text is will be the size of the button
         this.text.setText(text);
@@ -173,5 +175,8 @@ public class ReactiveButton extends StackPane {
         this.slide.play();
     }
 
-    public void setText(String text){initialize(text);}
+    public void setText( String text){
+          initialize(text);
+    }
+
 }

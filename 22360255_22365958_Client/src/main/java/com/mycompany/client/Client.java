@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.geometry.Rectangle2D;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 /**
  * Our entry point to the client gui application.
  * This creates the main scene and switches between the start screen and main screen.
@@ -24,8 +26,9 @@ public class Client extends Application{
     private MenuButton addBtn = new MenuButton("Add Class");
     private MenuButton removeBtn = new MenuButton("Remove Class");
     private MenuButton displayBtn = new MenuButton("Display Class Information");
-    private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection");
+    private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection") ;
     private ClientServerConnection con ;
+    private SceneManager sceneManager = new SceneManager();
     public static boolean connected = false ;
 
     /**
@@ -38,21 +41,23 @@ public class Client extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         ConnectScreen connect = new ConnectScreen() ;
+
         connect.connectButton.setOnMouseClicked(event -> {
             con = new ClientServerConnection();
 
             primaryStage.setOnCloseRequest(e -> this.handleResponseCode(con.send("ter:---")));
 
-            Scene commandScene = createCommandScene();
+            Scene commandScene = createCommandScene(primaryStage);
             primaryStage.setScene(commandScene);
             this.displayMsg("Connected Succesfully");
         });
 
-        Scene intialScene = new Scene(connect, screenBounds.getWidth()/1.6, screenBounds.getHeight()/1.6);
+        Scene intialScene = new Scene(connect, screenBounds.getWidth() / 1.6, screenBounds.getHeight() / 1.6);
 
         primaryStage.setTitle("Class scheduler");
         primaryStage.setScene(intialScene);
         primaryStage.show();
+
     }
 
     public static void main(String[] args){
@@ -63,7 +68,7 @@ public class Client extends Application{
      * Creates the main screen scene. It initializes components and sets width and height.
      * @return Scene containing the children for the main menu. Those being HBox's and VBox's as well as the relevant buttons.
      */
-    public Scene createCommandScene(){
+    public Scene createCommandScene(Stage primaryStage){
         addBtn.setOnSubmitEvent(event -> {
             String response = con.send("add:" + event.getEventData());
 
@@ -81,6 +86,7 @@ public class Client extends Application{
             String response = con.send("dis:" + event.getEventData());
 
             this.handleResponseCode(response);
+            sceneManager.switchTimetable(event);
         });
 
         terminateBtn.setOnMouseClicked(event -> {

@@ -15,7 +15,6 @@ public class ConnectScreen extends BorderPane {
     public ReactiveButton connectButton;
 
     public ConnectScreen(){
-        Scene scene = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnectScreen.fxml"));
         try {
             loader.setRoot(this);
@@ -28,7 +27,6 @@ public class ConnectScreen extends BorderPane {
         }catch (IOException e){
             e.printStackTrace();
         }
-
         connectButton.setText("Connect");
     }
 }
