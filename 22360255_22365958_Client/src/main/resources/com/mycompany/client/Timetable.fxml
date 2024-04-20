@@ -7,12 +7,15 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.mycompany.client.ReactiveButton?>
-<fx:root type="BorderPane" xmlns="http://javafx.com/javafx"
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mycompany.client.Timetable"
             prefHeight="400.0" prefWidth="600.0"
             fx:id="root">
-        <center>
-            <ReactiveButton fx:id="returnButton" />
-        </center>
+    <Label text="Monday"/>
+    <Label text="Tuesday"/>
+    <Label text="Wednesday"/>
+    <Label text="Thursday"/>
+    <Label text="Friday"/>
+    <ReactiveButton fx:id="returnButton" />
 </fx:root>
