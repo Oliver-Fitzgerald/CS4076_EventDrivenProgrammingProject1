@@ -6,13 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="2208be00-281b-47c7-9993-a7e10a42463d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/InputMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/InputMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ReactiveButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -29,19 +34,24 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ThreadSafetyTest.AddRemoveSuccessTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ThreadSafetyTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ofitz/Desktop/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Server&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/benja/Documents/Server/src/main/java/com/mycompany/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -51,6 +61,16 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="ThreadSafetyTest.AddRemoveSuccessTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ThreadSafetyTest" />
+      <option name="METHOD_NAME" value="AddRemoveSuccessTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="22360255_22365958_Server" />
       <method v="2">
@@ -64,6 +84,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ThreadSafetyTest.AddRemoveSuccessTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -86,6 +111,10 @@
       <workItem from="1709569700749" duration="2429000" />
       <workItem from="1709645603400" duration="744000" />
       <workItem from="1709823438133" duration="918000" />
+      <workItem from="1713290292973" duration="2233000" />
+      <workItem from="1713441060671" duration="9632000" />
+      <workItem from="1713527385709" duration="725000" />
+      <workItem from="1713634765493" duration="287000" />
     </task>
     <servers />
   </component>

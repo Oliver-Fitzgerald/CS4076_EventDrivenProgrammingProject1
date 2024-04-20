@@ -31,9 +31,13 @@ public class ThreadSafetyTest {
             e.printStackTrace();
         }
 
-        // Start the server in a separate thread for proper simulation
-        serverThread = new Thread(() -> Server.main(new String[0]));
-        serverThread.start();
+        try {
+            // Start the server in a separate thread for proper simulation
+            serverThread = new Thread(() -> Server.main(new String[0]));
+            serverThread.start();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @AfterEach
@@ -85,6 +89,13 @@ public class ThreadSafetyTest {
             public void run() {
                 ClientServerConnection con = new ClientServerConnection();
 
+                //Sleeping thread for a second allows for succesfull removal
+                //Any lower amount doesnt work
+//                try {
+//                    Thread.sleep(100);
+//                } catch(InterruptedException e){
+//                    e.printStackTrace();
+//                }
                 r2[0] = con.send(removeData);
 
                 if(con.send("ter:---").equals("30"))
