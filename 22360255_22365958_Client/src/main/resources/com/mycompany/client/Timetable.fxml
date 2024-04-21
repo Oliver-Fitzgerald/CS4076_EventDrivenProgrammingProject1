@@ -7,15 +7,49 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.mycompany.client.ReactiveButton?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <fx:root type="GridPane" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mycompany.client.Timetable"
-            prefHeight="400.0" prefWidth="600.0"
-            fx:id="root">
-    <Label text="Monday"/>
-    <Label text="Tuesday"/>
-    <Label text="Wednesday"/>
-    <Label text="Thursday"/>
-    <Label text="Friday"/>
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.mycompany.client.Timetable"
+         prefHeight="400.0" prefWidth="600.0"
+         fx:id="root">
+    <HBox GridPane.halignment="CENTER" GridPane.valignment="TOP">
+
+        <Label text="Monday" GridPane.columnIndex="1">
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+         </Label>
+
+        <Label text="Tuesday" GridPane.columnIndex="2">
+            <padding>
+              <Insets left="10" right="10"/>
+            </padding>
+        </Label>
+
+        <Label text="Wednesday" GridPane.columnIndex="3">
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+        </Label>
+
+        <Label text="Thursday" GridPane.columnIndex="4">
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+        </Label>
+
+        <Label text="Friday" GridPane.columnIndex="5">
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+        </Label>
+
+        <stylesheets>
+            <URL value="@timetable.css"/>
+        </stylesheets>
+    </HBox>
+
     <ReactiveButton fx:id="returnButton" />
 </fx:root>

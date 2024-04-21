@@ -50,13 +50,11 @@ public class Course{
 
     public int overlaps(Module check){
         for(Module mod : modules){
-            if(mod.getStartTime().isBefore(check.getEndTime()) &&
-                    check.getStartTime().isBefore(mod.getEndTime())) {
-                if (mod.getDate().equals(check.getDate()) && mod.getRoomCode().equals(check.getRoomCode())) {
-                    return 2;
-                }
+            if(mod.getStartTime().isBefore(check.getEndTime())
+                    && check.getStartTime().isBefore(mod.getEndTime())
+                    && mod.getDate().getDayOfWeek().equals(check.getDate().getDayOfWeek())
+                    && mod.getRoomCode().equals(check.getRoomCode()))
                 return 1;
-            }
         }
         return 0;
     }

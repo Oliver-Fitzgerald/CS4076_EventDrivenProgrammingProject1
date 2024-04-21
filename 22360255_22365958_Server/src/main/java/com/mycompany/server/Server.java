@@ -14,15 +14,20 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 
-public class Server {
+public class Server implements Runnable{
     private static ServerSocket servSock;
     private static final int PORT = 30572;
     public static int numConnections = 0;
-    private static boolean loading;
+    public static boolean loading ;
+    public static boolean serverLoaded; //for testing
+
     private static CourseList courses = new CourseList();
     private static final Object lock = new Object();
 
-    public static void main(String[] args) {
+    @Override
+    public void run(){
+        loading = true ;
+        serverLoaded = false ;
         Thread startServerLoadPrint = new Thread(new loadingText("Starting Server", "Server Started Successfully"));
         startServerLoadPrint.start();
 
@@ -36,9 +41,11 @@ public class Server {
             System.exit(1);
         }
         finally {
-            loading = false;
             try {
+                loading = false ;
                 startServerLoadPrint.join();
+                serverLoaded = true ;
+                System.out.println(serverLoaded);
             }
             catch(InterruptedException e){
                 System.out.println("Failed to join loading text");
@@ -46,19 +53,14 @@ public class Server {
         }
 
         loadCourses();
-
-        run();
-    }
-
-    private static void run(){
-        loading = true;
-        while(loading){
+        while(true){
             try{
                 Socket link = servSock.accept();
                 System.out.println("Client " + numConnections++ + " connected.");
 
                 Thread clientThread = new Thread(new ClientHandler(link, numConnections - 1));
                 clientThread.start();
+
             }catch(IOException e){
                 e.printStackTrace();
                 System.exit(1);
@@ -93,20 +95,20 @@ public class Server {
 
         @Override
         public void run(){
-            try{
+            //try{
                 int i = 1;
                 System.out.print(this.startMessage);
                 while(loading) {
                     System.out.print(".".repeat(i));
-                    System.out.flush();
-                    Thread.sleep(500);
+                    //System.out.flush();
+                    //Thread.sleep(500);
                     System.out.print("\b".repeat(i));
                     i = (i % 3) + 1;
                 }
-            }
-            catch(InterruptedException e){
+            //}
+            //catch(InterruptedException e){
                 loading = false;
-            }
+            //}
             System.out.println("\n" + endMessage);
         }
     }
@@ -141,11 +143,8 @@ public class Server {
             int overlap = cs.overlaps(toAdd);
             if(cs.getCode().equals(courseCode)){
                 courseIndex = i;
-                if(overlap == 1 || overlap == 2)
+                if(overlap == 1)
                     throw new IncorrectActionException("16");
-            }
-            else if(overlap == 2){
-                throw new IncorrectActionException("17");
             }
         }
 
