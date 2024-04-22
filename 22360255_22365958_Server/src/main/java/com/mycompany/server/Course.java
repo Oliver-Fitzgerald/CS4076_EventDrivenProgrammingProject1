@@ -49,7 +49,8 @@ public class Course{
     }
 
     public int overlaps(Module check){
-        for(Module mod : modules){
+        for(int i = 0; i < modCount; i++){
+            Module mod = modules[i] ;
             if(mod.getStartTime().isBefore(check.getEndTime())
                     && check.getStartTime().isBefore(mod.getEndTime())
                     && mod.getDate().getDayOfWeek().equals(check.getDate().getDayOfWeek())

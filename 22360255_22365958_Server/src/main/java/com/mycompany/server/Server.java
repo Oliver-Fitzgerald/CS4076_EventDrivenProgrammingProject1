@@ -45,7 +45,6 @@ public class Server implements Runnable{
                 loading = false ;
                 startServerLoadPrint.join();
                 serverLoaded = true ;
-                System.out.println(serverLoaded);
             }
             catch(InterruptedException e){
                 System.out.println("Failed to join loading text");
