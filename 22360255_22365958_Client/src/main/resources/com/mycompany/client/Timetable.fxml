@@ -14,42 +14,78 @@
          fx:controller="com.mycompany.client.Timetable"
          prefHeight="400.0" prefWidth="600.0"
          fx:id="root">
-    <HBox GridPane.halignment="CENTER" GridPane.valignment="TOP">
 
-        <Label text="Monday" GridPane.columnIndex="1">
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-         </Label>
+    <GridPane fx:id="timetable">
 
-        <Label text="Tuesday" GridPane.columnIndex="2">
-            <padding>
-              <Insets left="10" right="10"/>
-            </padding>
-        </Label>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="Time" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="09:00 - 10:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text="10:00 - 11:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text="11:00 - 12:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text="13:00 - 14:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="5" text="14:00 - 15:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="6" text="15:00 - 16:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="7" text="16:00 - 17:00" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="8" text="17:00 - 18:00" prefWidth="100" alignment="CENTER"/>
 
-        <Label text="Wednesday" GridPane.columnIndex="3">
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-        </Label>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="0" text="Monday" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="1" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="6" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="7" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="8" text="-" prefWidth="100" alignment="CENTER"/>
 
-        <Label text="Thursday" GridPane.columnIndex="4">
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-        </Label>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="0" text="Tuesday" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="1" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="2" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="3" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="4" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="5" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="6" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="7" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="8" text="-" prefWidth="100" alignment="CENTER"/>
 
-        <Label text="Friday" GridPane.columnIndex="5">
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-        </Label>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="0" text="Wednesday" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="1" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="2" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="3" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="4" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="5" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="6" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="7" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="3" GridPane.rowIndex="8" text="-" prefWidth="100" alignment="CENTER"/>
 
-        <stylesheets>
-            <URL value="@timetable.css"/>
-        </stylesheets>
-    </HBox>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="0" text="Thursday" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="1" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="2" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="3" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="4" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="5" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="6" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="7" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="4" GridPane.rowIndex="8" text="-" prefWidth="100" alignment="CENTER"/>
 
-    <ReactiveButton fx:id="returnButton" />
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="0" text="Friday" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="1" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="2" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="3" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="4" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="5" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="6" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="7" text="-" prefWidth="100" alignment="CENTER"/>
+    <Label GridPane.columnIndex="5" GridPane.rowIndex="8" text="-" prefWidth="100" alignment="CENTER"/>
+
+    </GridPane>
+
+
+
+
+    <stylesheets>
+        <URL value="@timetable.css"/>
+    </stylesheets>
+
+    <ReactiveButton fx:id="returnButton"/>
+
 </fx:root>

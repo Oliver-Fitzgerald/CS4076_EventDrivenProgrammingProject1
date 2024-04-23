@@ -27,7 +27,7 @@ public class Client extends Application{
     private MenuButton removeBtn = new MenuButton("Remove Class");
     private MenuButton displayBtn = new MenuButton("Display Class Information");
     private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection") ;
-    private ClientServerConnection con ;
+    private static ClientServerConnection con ;
     private SceneManager sceneManager = new SceneManager();
     public static boolean connected = false ;
 

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class SceneManager {
     private Parent root ;
 
     public void switchTimetable(SubmitEvent event) {
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
 
         Timetable timetable = new Timetable() ;
             try {
@@ -31,11 +32,20 @@ public class SceneManager {
             }
 
             scene = new Scene(root) ;
+            stage.setTitle("Timetable");
             stage.setScene(scene) ;
             stage.show();
+
             timetable.initializeTimetable() ;
 
     }
-    public void switchCommandScene(SubmitEvent event){
+    public void switchCommandScene(MouseEvent event){
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        Client client = new Client() ;
+
+        scene = client.createCommandScene(stage) ;
+        stage.setTitle("");
+        stage.setScene(scene) ;
+        stage.show();
     }
 }
