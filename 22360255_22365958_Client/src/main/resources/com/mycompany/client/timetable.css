@@ -2,4 +2,12 @@
     -fx-border-color: black;
     -fx-border-width: 1;
     -fx-border-style: solid;
+
+}
+#timetable .variable{
+    -fx-background-color: grey ;
+}
+
+#timetable .alternative-row{
+    -fx-background-color: lightgrey ;
 }

@@ -44,12 +44,13 @@ public class ClientServerConnection {
         try{
             out.println(toSend);
             //receive message
-            try {
-                response = in.readLine();
-            } catch(SocketException e){
-                System.out.println("Server closed connection\nExiting...");
-                System.exit(1);
-            }
+            if (!toSend.equals("ear:"))
+                try {
+                    response = in.readLine();
+                } catch(SocketException e){
+                    System.out.println("Server closed connection\nExiting...");
+                    System.exit(1);
+                }
         }
         catch (IOException e){
             e.printStackTrace();

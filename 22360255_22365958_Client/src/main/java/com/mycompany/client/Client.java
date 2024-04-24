@@ -6,7 +6,9 @@ import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.WeakChangeListener;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
@@ -86,7 +88,8 @@ public class Client extends Application{
             String response = con.send("dis:" + event.getEventData());
 
             this.handleResponseCode(response);
-            sceneManager.switchTimetable(event);
+            if (!response.equals("01"))
+                sceneManager.switchTimetable(event,response);
         });
 
         terminateBtn.setOnMouseClicked(event -> {
@@ -95,11 +98,16 @@ public class Client extends Application{
             this.handleResponseCode(response);
         });
 
+        CheckBox earlyMorning = new CheckBox("Early Morning") ;
+        earlyMorning.setOnAction(event -> {
+            con.send("ear:") ;
+        });
+
         serverResponseLbl.setId("serverLbl");
 
         //Here we create the basic layout structure of the scene.
         HBox btnBox = new HBox(addBtn, removeBtn, displayBtn);
-        VBox menuBox = new VBox(btnBox, terminateBtn, serverResponseLbl);
+        VBox menuBox = new VBox(btnBox, terminateBtn, earlyMorning, serverResponseLbl);
         Scene commandScene = new Scene(menuBox, screenBounds.getWidth()/1.6, screenBounds.getHeight()/1.6);
 
         //As I've learned spacing should be done in the java not the css

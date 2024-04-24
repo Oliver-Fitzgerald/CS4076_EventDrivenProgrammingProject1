@@ -67,7 +67,7 @@ public class Module {
 
     @Override
     public String toString(){
-        return modCode + ": " + roomCode + " at " + startTime + " on " + date;
+        return modCode + ": " + roomCode + " at " + startTime + " on " + date + ";";
     }
 
     @XmlElement(name="date")

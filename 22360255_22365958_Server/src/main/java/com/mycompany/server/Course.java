@@ -82,13 +82,13 @@ public class Course{
 
     @Override
     public String toString(){
-        String out = code + ":\n";
+        String out = code + ":";
 
         for(Module mod : modules){
             if(mod != null)
-                out += mod + "\n";
+                out += mod ;
         }
 
-        return out.substring(0, out.length()-2);
+        return out;
     }
 }

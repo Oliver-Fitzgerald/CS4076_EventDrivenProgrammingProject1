@@ -205,6 +205,7 @@ public class Server implements Runnable{
         for(Course c : courses.getCourses()){
 
             if(c.getCode().equals(data)){
+                //sort
                 if (earlyMorning) {
 
                     ArrayList<Module>[] days = new ArrayList[7] ;
@@ -225,8 +226,9 @@ public class Server implements Runnable{
                         ForkJoinPool.commonPool().invoke(new EarlyMorning(  (Module[]) days[0].toArray(),0,days[0].size()));
                 }
 
+                String moduleDetails = c.toString().substring(c.toString().indexOf(":") + 1) ;
                 System.out.println(c);
-                return "00";
+                return moduleDetails ;
             }
         }
 
