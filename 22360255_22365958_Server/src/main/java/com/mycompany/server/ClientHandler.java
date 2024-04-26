@@ -35,6 +35,8 @@ public class ClientHandler implements Runnable {
                     switch (code) {
                         case "add": //add module
                             out.println(Server.addModule(data));
+                            if (earlyMorning)
+                                Server.earlyMorning() ;
                             System.out.println(id + ": " + "10");
                             break;
                         case "rem": //remove module
@@ -47,7 +49,8 @@ public class ClientHandler implements Runnable {
                             break;
                         case "ear": //early morning (set off by default)
                             earlyMorning = !earlyMorning;
-                            System.out.println("early morning = " + earlyMorning);
+                            if (earlyMorning)
+                                Server.earlyMorning();
                             break;
                         case "ter": //terminate connection
                             try {

@@ -32,6 +32,7 @@ public class Client extends Application{
     private static ClientServerConnection con ;
     private SceneManager sceneManager = new SceneManager();
     public static boolean connected = false ;
+    public static boolean earlyMorning = false ;
 
     /**
      * This label is included in order to give the user responsiveness.
@@ -98,10 +99,15 @@ public class Client extends Application{
             this.handleResponseCode(response);
         });
 
+
         CheckBox earlyMorning = new CheckBox("Early Morning") ;
         earlyMorning.setOnAction(event -> {
-            con.send("ear:") ;
+            String response = con.send("ear:") ;
+            Client.earlyMorning = !Client.earlyMorning ;
         });
+        if (Client.earlyMorning){
+            earlyMorning.setSelected(true);
+        }
 
         serverResponseLbl.setId("serverLbl");
 

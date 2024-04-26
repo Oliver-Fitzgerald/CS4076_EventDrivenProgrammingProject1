@@ -51,13 +51,21 @@ public class Course{
     public int overlaps(Module check){
         for(int i = 0; i < modCount; i++){
             Module mod = modules[i] ;
-            if(mod.getStartTime().isBefore(check.getEndTime())
-                    && check.getStartTime().isBefore(mod.getEndTime())
-                    && mod.getDate().getDayOfWeek().equals(check.getDate().getDayOfWeek())
-                    && mod.getRoomCode().equals(check.getRoomCode()))
-                return 1;
+
+            //Room time and day
+            if (mod.getRoomCode().equals(check.getRoomCode()) &&
+                mod.getStartTime().equals(check.getStartTime()) &&
+                mod.getDate().getDayOfWeek().toString().equals(check.getDate().getDayOfWeek().toString()))
+                return 0 ;
+
+
+            //Room and time
+            if (mod.getStartTime().equals(check.getStartTime()) &&
+                    mod.getDate().getDayOfWeek().toString().equals(check.getDate().getDayOfWeek().toString()))
+                return 1 ;
+
         }
-        return 0;
+        return 2;
     }
 
     @XmlElement(name="modules")

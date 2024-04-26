@@ -23,6 +23,7 @@ public class Server implements Runnable{
 
     private static CourseList courses = new CourseList();
     private static final Object lock = new Object();
+    private static final ForkJoinPool fjPool = new ForkJoinPool() ;
 
     @Override
     public void run(){
@@ -136,14 +137,20 @@ public class Server implements Runnable{
             throw new IncorrectActionException("11");
         }
 
+
+        if (toAdd.getStartTime().getMinute() != 0) //if time in not a whole hour
+            throw new IncorrectActionException("05") ;
+
         //Check for different types of module overlap
         for(int i = 0; i < courses.size(); i++){
-            Course cs = courses.get(i);
-            int overlap = cs.overlaps(toAdd);
-            if(cs.getCode().equals(courseCode)){
-                courseIndex = i;
-                if(overlap == 1)
-                    throw new IncorrectActionException("16");
+            Course course = courses.get(i);
+            int overlap = course.overlaps(toAdd);
+
+            if (overlap == 0)
+                throw new IncorrectActionException("17") ; //overlaps with another module in that room
+            if(course.getCode().equals(courseCode) && overlap == 1){
+                throw new IncorrectActionException("16"); //Overlaps with another module in the course
+
             }
         }
 
@@ -205,26 +212,6 @@ public class Server implements Runnable{
         for(Course c : courses.getCourses()){
 
             if(c.getCode().equals(data)){
-                //sort
-                if (earlyMorning) {
-
-                    ArrayList<Module>[] days = new ArrayList[7] ;
-                    for (int i = 0; i < 7; i++)
-                        days[i] = new ArrayList<Module>() ;
-
-                    //Add modules to relevant day
-                    for (Course course:courses.getCourses()) {
-                        for (int i = 0; i < course.getModCount(); i++) {
-                            int day = course.getModules()[i].getDate().getDayOfWeek().getValue();
-                            days[day].add(course.getModules()[i]);
-
-                        }
-                    }
-
-                    //Sort each days classes by time
-                    for (int i = 0; i < 7; i++)
-                        ForkJoinPool.commonPool().invoke(new EarlyMorning(  (Module[]) days[0].toArray(),0,days[0].size()));
-                }
 
                 String moduleDetails = c.toString().substring(c.toString().indexOf(":") + 1) ;
                 System.out.println(c);
@@ -233,6 +220,54 @@ public class Server implements Runnable{
         }
 
         throw new IncorrectActionException("02");
+    }
+    public static String earlyMorning(){
+
+        ArrayList<ArrayList<Module>> moduleInRoom = new ArrayList<ArrayList<Module>>() ;
+        int room = 1 ;
+        boolean first = true ;
+        for (Course course:courses.getCourses()) {
+            for (int i = 0; i < course.getModCount(); i++){
+                boolean found = false ;
+                ArrayList<Module> row  = new ArrayList<>() ;
+
+                for (int j = 0; j < room; j++) {
+                    if (first) {
+                        row.add(course.getModules()[0]);
+                        moduleInRoom.add(row) ;
+                        first = false ;
+                        found = true ;
+                    }
+                    else if (moduleInRoom.get(room - 1).get(0).getRoomCode().equals(course.getModules()[i].getRoomCode()) && !found) {
+                        moduleInRoom.get(room - 1).add(course.getModules()[i]);
+                        found = true ;
+                    }
+
+                }
+                if (!found){
+                    room++ ;
+                    row.add(course.getModules()[i]);
+                    moduleInRoom.add(row) ;
+                }
+
+            }
+
+        }
+
+        for (int i = 0; i < moduleInRoom.size(); i++){
+            Module[] rooms = moduleInRoom.get(i).toArray(new Module[0]) ;
+            moduleInRoom.set(i,ForkJoinPool.commonPool().invoke(new EarlyMorning(rooms))) ;
+        }
+
+        //FOR TESTING PURPOSES
+
+        for (ArrayList<Module> modules: moduleInRoom){
+            for (Module module:modules) {
+                System.out.println(module.getModCode() + "  at  " + module.getStartTime().toString() + "   in    " + module.getRoomCode());
+            }
+        }
+
+        return "All classes have been moved to the morning" ;
     }
 
     private static String[] mySplit(String data, char regex){

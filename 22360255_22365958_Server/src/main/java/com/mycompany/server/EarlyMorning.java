@@ -1,57 +1,118 @@
 package com.mycompany.server;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.RecursiveTask;
 
-public class EarlyMorning extends RecursiveTask<String> {
+public class EarlyMorning extends RecursiveTask<ArrayList<Module>> {
 
     private Module[] day ;
-    private ArrayList<Module> out = new ArrayList<>() ;
-    private int lo,hi ;
-    public EarlyMorning(Module[] day,int lo,int hi){
+    private static ArrayList<Module> out ;
+    public EarlyMorning(Module[] day){
         this.day = day ;
-        this.lo = lo ;
-        this.hi = hi ;
-
     }
 
     @Override
-    public String compute(){
+    public ArrayList<Module> compute() {
+        int length = day.length;
 
-        if (hi - lo == 1){
-            Module temp ;
-            if (day[lo].getStartTime().isAfter(day[hi].getStartTime())) {
-                temp = day[lo];
-                day[lo] = day[hi];
-                day[hi] = temp;
-            }
-        }else{
-            int mid =  (hi - lo) / 2;
-            EarlyMorning left = new EarlyMorning(day,lo,mid) ;
-            EarlyMorning right = new EarlyMorning(day,mid + 1,hi) ;
-            left.compute() ;
-            right.fork() ;
-            right.join() ;
+        if (length <= 1) {
+            out = new ArrayList<>() ;
+            out.add(day[0]) ;
+            newTimes(out) ;
+            return out ;
+        }
 
-            while (out.size() < day.length) {
-                if (left.lo == right.lo){
-                    out.add(right.day[right.lo]);
-                    right.lo++ ;
-                } else if (right.lo == right.lo + 2) {
-                    out.add(left.day[left.lo]) ;
-                   left.lo++ ;
-                }else if (left.day[left.lo].getStartTime().isBefore(right.day[right.lo].getStartTime())){
-                    out.add(left.day[left.lo]);
-                    left.lo++ ;
-                } else {
-                    out.add(right.day[right.lo]);
-                    right.lo++;
-                }
+        int middle = length / 2;
+        Module[] leftArr = new Module[middle] ;
+        Module[] rightArr = new Module[length - middle] ;
+
+        int l = 0 ;
+        int r = 0 ;
+        for (;l < length; l++){
+            if (l < middle)
+                leftArr[l] = day[l] ;
+            else{
+                rightArr[r] = day[l] ;
+                r++ ;
             }
         }
 
-        return null;
+
+        EarlyMorning left = new EarlyMorning(leftArr) ;
+        EarlyMorning right = new EarlyMorning(rightArr) ;
+        /*
+        left.fork() ;
+        right.compute() ;
+        left.join() ;
+
+         */
+
+        day = merge(leftArr,rightArr,day);
+        out = new ArrayList<>(Arrays.asList(day)) ;
+
+        out = newTimes(out) ;
+        return out ;
     }
 
+
+    private static Module[] merge(Module[] left, Module[] right, Module[] array){
+
+        int leftSize = array.length / 2;
+        int rightSize = array.length - leftSize ;
+        int i=0, l=0, r=0 ;
+
+        while (l < leftSize && r < rightSize){
+            if (left[l].getStartTime().isBefore(right[r].getStartTime())) {
+                array[i] = left[l];
+
+                l++ ;
+                i++ ;
+            }else{
+                array[i] = right[r] ;
+
+                r++ ;
+                i++ ;
+            }
+        }
+        while (l < leftSize){
+            array[i] = left[l];
+
+            l++ ;
+            i++ ;
+
+        }
+        while (r < rightSize){
+            array[i] = right[r];
+
+            r++ ;
+            i++ ;
+
+        }
+        return array ;
+
+    }
+
+    private static ArrayList<Module> newTimes(ArrayList<Module> arrayList){
+        Module module ;
+
+        for (int i = 0; i < arrayList.size(); i++){
+             module = arrayList.get(i) ;
+
+             switch (i){
+                case 0: module.setStartTime(LocalTime.of(9,0)); break ;
+                case 1: module.setStartTime(LocalTime.of(10,0)); break ;
+                case 2: module.setStartTime(LocalTime.of(11,0)); break ;
+                case 3: module.setStartTime(LocalTime.of(12,0)); break ;
+                case 4: module.setStartTime(LocalTime.of(13,0)); break ;
+                case 5: module.setStartTime(LocalTime.of(14,0)); break ;
+                case 6: module.setStartTime(LocalTime.of(15,0)); break ;
+                case 7: module.setStartTime(LocalTime.of(16,0)); break ;
+                case 8: module.setStartTime(LocalTime.of(17,0)); break ;
+            }
+        }
+        return out ;
+    }
 
 }
