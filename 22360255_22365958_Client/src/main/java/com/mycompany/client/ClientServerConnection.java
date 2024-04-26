@@ -38,33 +38,23 @@ public class ClientServerConnection {
     }
 
     public String send(String toSend){
-        String[] response = {""};
-        Thread awaitResponse = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try{
-                    out.println(toSend);
-                    //receive message
-                    if (!toSend.equals("ear:"))
-                        try {
-                            response[0] = in.readLine();
-                        } catch(SocketException e){
-                            System.out.println("Server closed connection\nExiting...");
-                            System.exit(1);
-                        }
+        String response = "";
+        try{
+            out.println(toSend);
+            //receive message
+            if (!toSend.equals("ear:"))
+                try {
+                    response = in.readLine();
+                } catch(SocketException e){
+                    System.out.println("Server closed connection\nExiting...");
+                    System.exit(1);
                 }
-                catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-        });
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
-        awaitResponse.start();
-
-        while(response[0] == null || response[0].isEmpty()){; }
-
-        return response[0];
+        return response;
     }
 
     public void terminate(){

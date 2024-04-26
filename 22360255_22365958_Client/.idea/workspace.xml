@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="38eb8cc6-aac6-4ea2-bbf7-705a7be46d77" name="Changes" comment="Initial Commit">
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Server/src/main/java/com/mycompany/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Server/src/main/java/com/mycompany/server/ClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +48,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/benja/Downloads/JavaFX_Concurrent",
+    "last_opened_file_path": "C:/Users/benja/Documents/GitHub/CS4076_EventDrivenProgrammingProject1/22360255_22365958_Client",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -106,7 +107,8 @@
       <workItem from="1713445074006" duration="2228000" />
       <workItem from="1713527391488" duration="598000" />
       <workItem from="1713960091910" duration="1586000" />
-      <workItem from="1714125843955" duration="2317000" />
+      <workItem from="1714125843955" duration="2406000" />
+      <workItem from="1714133486652" duration="2346000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />

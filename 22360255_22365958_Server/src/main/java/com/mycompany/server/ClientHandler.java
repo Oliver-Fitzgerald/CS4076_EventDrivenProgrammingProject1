@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
                             System.out.println(id + ": " + "20");
                             break;
                         case "dis": //display class
-                            out.println(Server.displayCourse(data,earlyMorning));
+                            out.println("00|"+Server.displayCourse(data,earlyMorning));
                             System.out.println(id + ": " + "00");
                             break;
                         case "ear": //early morning (set off by default)

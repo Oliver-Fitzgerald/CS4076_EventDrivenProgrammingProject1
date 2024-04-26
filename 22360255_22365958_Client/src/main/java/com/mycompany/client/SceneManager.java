@@ -15,8 +15,11 @@ public class SceneManager {
     private Scene scene ;
     private Parent root ;
 
-    public void switchTimetable(SubmitEvent event, String courseDetails) {
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+    public SceneManager(Stage primaryStage){
+        stage = primaryStage;
+    }
+
+    public void switchTimetable(String courseDetails) {
 
         Timetable timetable = new Timetable() ;
             try {

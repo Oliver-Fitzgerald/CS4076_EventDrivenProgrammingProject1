@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.WeakChangeListener;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
@@ -30,10 +31,9 @@ public class Client extends Application{
     private MenuButton displayBtn = new MenuButton("Display Class Information");
     private ReactiveButton terminateBtn = new ReactiveButton("Terminate Connection") ;
     private static ClientServerConnection con ;
-    private SceneManager sceneManager = new SceneManager();
+    protected static SceneManager sceneManager;
     public static boolean connected = false ;
     public static boolean earlyMorning = false ;
-
     /**
      * This label is included in order to give the user responsiveness.
      * Things like "connection successful" and "added class succesfully"
@@ -43,6 +43,8 @@ public class Client extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        sceneManager = new SceneManager(primaryStage);
+
         ConnectScreen connect = new ConnectScreen() ;
 
         connect.connectButton.setOnMouseClicked(event -> {
@@ -60,7 +62,6 @@ public class Client extends Application{
         primaryStage.setTitle("Class scheduler");
         primaryStage.setScene(intialScene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args){
@@ -73,30 +74,72 @@ public class Client extends Application{
      */
     public Scene createCommandScene(Stage primaryStage){
         addBtn.setOnSubmitEvent(event -> {
-            String response = con.send("add:" + event.getEventData());
+            Task<String> task = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    return con.send("add:" + event.getEventData());
+                }
+            };
 
-            this.handleResponseCode(response);
+            task.setOnSucceeded(e -> {
+                this.handleResponseCode(task.getValue());
+            });
+
+            Thread t = new Thread(task);
+            t.setDaemon(true);
+            t.start();
         });
 
         removeBtn.setOnSubmitEvent(event -> {
-            String response = con.send("rem:" + event.getEventData());
+            Task<String> task = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    return con.send("rem:" + event.getEventData());
+                }
+            };
 
-            this.handleResponseCode(response);
+            task.setOnSucceeded(e -> {
+                this.handleResponseCode(task.getValue());
+            });
+
+            Thread t = new Thread(task);
+            t.setDaemon(true);
+            t.start();
         });
 
         displayBtn.makeCourseMenu();
         displayBtn.setOnSubmitEvent(event -> {
-            String response = con.send("dis:" + event.getEventData());
+            Task<String> task = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    return con.send("dis:" + event.getEventData());
+                }
+            };
 
-            this.handleResponseCode(response);
-            if (!response.equals("01"))
-                sceneManager.switchTimetable(event,response);
+            task.setOnSucceeded(e -> {
+                this.handleResponseCode(task.getValue());
+            });
+
+            Thread t = new Thread(task);
+            t.setDaemon(true);
+            t.start();
         });
 
         terminateBtn.setOnMouseClicked(event -> {
-            String response = con.send("ter:---");
+            Task<String> task = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    return con.send("ter:---");
+                }
+            };
 
-            this.handleResponseCode(response);
+            task.setOnSucceeded(e -> {
+                this.handleResponseCode(task.getValue());
+            });
+
+            Thread t = new Thread(task);
+            t.setDaemon(true);
+            t.start();
         });
 
 
@@ -218,9 +261,9 @@ public class Client extends Application{
             this.displayMsg(errorMessage);
         }
         else if(code.charAt(0) == '0'){
-            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
             switch(code.charAt(1)){
                 case '0':
+                    sceneManager.switchTimetable(code.split("\\|")[1]);
                     this.displayMsg("Succesfully displayed course");
                     break;
                 case '1':

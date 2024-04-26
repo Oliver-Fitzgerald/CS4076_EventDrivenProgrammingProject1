@@ -120,7 +120,6 @@ public class Timetable extends GridPane {
         boolean nextModuleExists = true ;
         courseDetails = ";" + courseDetails ;
         while (nextModuleExists){
-
             String moduleStartTime = courseDetails.substring(courseDetails.indexOf("at") + 3,courseDetails.indexOf("at") + 5) ;
             String moduleCode = courseDetails.substring(1,courseDetails.indexOf(":")) ;
             String moduleRoom = courseDetails.substring(courseDetails.indexOf(":") + 2,courseDetails.indexOf("at") - 1) ;
@@ -143,14 +142,12 @@ public class Timetable extends GridPane {
             courseDetails = courseDetails.substring(courseDetails.indexOf(";",1)) ;
             if (courseDetails.equals(";"))
                 nextModuleExists =  false ;
-
         }
 
 
 
         returnButton.setOnMouseClicked(event -> {
-            SceneManager sceneManager = new SceneManager() ;
-            sceneManager.switchCommandScene(event);
+            Client.sceneManager.switchCommandScene(event);
         });
 
 

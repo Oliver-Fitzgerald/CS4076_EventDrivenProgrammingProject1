@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ClientServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ClientServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Timetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Timetable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +121,7 @@
       <workItem from="1713527385709" duration="725000" />
       <workItem from="1713634765493" duration="287000" />
       <workItem from="1714125544049" duration="893000" />
+      <workItem from="1714133433741" duration="1799000" />
     </task>
     <servers />
   </component>
