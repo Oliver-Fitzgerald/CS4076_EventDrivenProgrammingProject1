@@ -140,7 +140,6 @@ public class Client extends Application{
 
     private void handleResponseCode(String code){
         if(code.equals("-1")){
-            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
             this.displayMsg("Fatal error\nExiting...");
             try {
                 Thread.sleep(1000);
@@ -151,7 +150,6 @@ public class Client extends Application{
             System.exit(1);
         }
         else if(code.equals("-2")){
-            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
             this.displayMsg("No data entered");
         }
         else if(code.charAt(0) == '1'){
@@ -184,13 +182,6 @@ public class Client extends Application{
                         break;
                 }
             }
-            //Resizing label font size depending on how big the error message is
-            if(errorMessage.length() > 120)
-                this.serverResponseLbl.setStyle("-fx-font-size: 12;");
-            else if(errorMessage.length() > 75)
-                this.serverResponseLbl.setStyle("-fx-font-size: 18;");
-            else
-                this.serverResponseLbl.setStyle("-fx-font-size: 24;");
 
             this.displayMsg(errorMessage);
         }
@@ -198,8 +189,8 @@ public class Client extends Application{
             char[] errors = code.substring(1).toCharArray();
             String errorMessage = "";
 
-            for(char ch : errors){
-                switch(ch){
+            for(char ch : errors) {
+                switch (ch) {
                     case '0':
                         errorMessage += "Succesfully removed module";
                         break;
@@ -223,13 +214,6 @@ public class Client extends Application{
                         break;
                 }
             }
-            //Resizing label font size depending on how big the error message is
-            if(errorMessage.length() > 120)
-                this.serverResponseLbl.setStyle("-fx-font-size: 12;");
-            else if(errorMessage.length() > 75)
-                this.serverResponseLbl.setStyle("-fx-font-size: 18;");
-            else
-                this.serverResponseLbl.setStyle("-fx-font-size: 24;");
 
             this.displayMsg(errorMessage);
         }
@@ -253,6 +237,14 @@ public class Client extends Application{
     }
 
     private void displayMsg(String msg){
+        //Resizing label font size depending on how big the error message is
+        if(msg.length() > 120)
+            this.serverResponseLbl.setStyle("-fx-font-size: 12;");
+        else if(msg.length() > 75)
+            this.serverResponseLbl.setStyle("-fx-font-size: 18;");
+        else
+            this.serverResponseLbl.setStyle("-fx-font-size: 24;");
+
         serverResponseLbl.setText(msg);
 
         PauseTransition pause = new PauseTransition(Duration.seconds(5));

@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
 
-import static javafx.application.Application.launch;
-
 public class ClientServerConnection {
     private InetAddress host;
     private static final int PORT = 30572;
@@ -40,22 +38,33 @@ public class ClientServerConnection {
     }
 
     public String send(String toSend){
-        String response = "";
-        try{
-            out.println(toSend);
-            //receive message
-            if (!toSend.equals("ear:"))
-                try {
-                    response = in.readLine();
-                } catch(SocketException e){
-                    System.out.println("Server closed connection\nExiting...");
-                    System.exit(1);
+        String[] response = {""};
+        Thread awaitResponse = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try{
+                    out.println(toSend);
+                    //receive message
+                    if (!toSend.equals("ear:"))
+                        try {
+                            response[0] = in.readLine();
+                        } catch(SocketException e){
+                            System.out.println("Server closed connection\nExiting...");
+                            System.exit(1);
+                        }
                 }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return response;
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        awaitResponse.start();
+
+        while(response[0] == null || response[0].isEmpty()){; }
+
+        return response[0];
     }
 
     public void terminate(){

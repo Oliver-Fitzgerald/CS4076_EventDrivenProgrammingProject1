@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2208be00-281b-47c7-9993-a7e10a42463d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ClientServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../22360255_22365958_Client/src/main/java/com/mycompany/client/ClientServerConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +36,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServerStart.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ThreadSafetyTest.AddRemoveSuccessTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ThreadSafetyTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -115,6 +118,7 @@
       <workItem from="1713441060671" duration="9632000" />
       <workItem from="1713527385709" duration="725000" />
       <workItem from="1713634765493" duration="287000" />
+      <workItem from="1714125544049" duration="893000" />
     </task>
     <servers />
   </component>
