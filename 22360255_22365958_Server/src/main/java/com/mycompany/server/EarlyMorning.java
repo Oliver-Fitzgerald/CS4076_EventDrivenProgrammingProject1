@@ -42,12 +42,10 @@ public class EarlyMorning extends RecursiveTask<ArrayList<Module>> {
 
         EarlyMorning left = new EarlyMorning(leftArr) ;
         EarlyMorning right = new EarlyMorning(rightArr) ;
-        /*
         left.fork() ;
         right.compute() ;
         left.join() ;
 
-         */
 
         day = merge(leftArr,rightArr,day);
         out = new ArrayList<>(Arrays.asList(day)) ;
